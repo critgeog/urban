@@ -12,37 +12,34 @@
 library(tidyverse)
 library(magrittr)
 library(stringr)
-USbg <- read.csv("Desktop/school/tempNHGIS/current projects/urban/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
+USbg <- read.csv("data/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
 USbg <- as_tibble(USbg)
 head(USbg)
 
 # USarea is the square miles of each block group
-USarea <- read.csv("desktop/school/tempNHGIS/current projects/urban/areas.txt")
+# need to confirm area with UShammerBG.R
+USarea <- read.csv("data/areas.txt")
 USarea <- as_tibble(USarea)
 head(USarea)
 USarea <- USarea[,-(c(7:9))]
 
 #read in housing unit by year Census
-hu1940 <- read.csv("dropbox/hafley/urbanization/nhgis0022_csv/nhgis0022_ds78_1940_county.csv")
+hu1940 <- read.csv("data/nhgis0022_csv/nhgis0022_ds78_1940_county.csv")
 hu1940 <- as_tibble(hu1940)
 hu1940$COUNTYA <- as.integer(hu1940$COUNTYA/10)
 str(hu1940)
 
-hu1970 <- read_csv("dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds94_1970_county.csv")
-hu1980 <- read_csv("dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds104_1980_county.csv")
-hu1990 <- read_csv("dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds120_1990_county.csv")
-hu2000 <- read_csv("dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds146_2000_county.csv")
-hu2010 <- read.csv("dropbox/hafley/urbanization/nhgis0026_csv/nhgis0026_ds172_2010_county.csv")
+hu1970 <- read_csv("data/nhgis0025_csv/nhgis0025_ds94_1970_county.csv")
+hu1980 <- read_csv("data/nhgis0025_csv/nhgis0025_ds104_1980_county.csv")
+
+hu1990 <- read_csv("data/nhgis0025_csv/nhgis0025_ds120_1990_county.csv")
+hu2000 <- read_csv("data/nhgis0025_csv/nhgis0025_ds146_2000_county.csv")
+
+hu2010 <- read.csv("data/nhgis0026_csv/nhgis0026_ds172_2010_county.csv")
 hu2010 <- as_tibble(hu2010)
 str(hu2010)
 
 USbg$COUNTYJ <- str_sub(USbg$GISJOIN, 1, 8)
-
-#str_sub(USbg$GISJOIN, end = 8)
-# hu =  G0100010
-#       G0501050
-# us = xx1xxx1x
-# us =  xx5x
 
 # modify by Year Census
 hu1940 <- hu1940[,-(c(3:5,9))]
