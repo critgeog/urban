@@ -1,44 +1,46 @@
 #*********************************************************************************
-# copied from hammerMethod.R from desktop/tempNHGIS/current projects/urban       #
 # original created: March 30, 2017                                               #
-# file create: November 10, 2017                                                 #
-# last modified: 2.1.18                                                         #
-# saved: ("NHGIS/current projects/urban/UShammerMethod.R)                        #
-# data from NHGIS; and expansion on hammerMethod.R, which is only ATL            #
-# read in location: ("school/tempNHGIS/current projects/urban)                   #
-# Author: Taylor Hafley                                                          #
+# file created: November 10, 2017                                                #
+# by: Taylor Hafley                                                              #
+# last modified: 6.4.18                                                          #
+# local wd ("Google Drive/school/R/urban/data)                                   #
+# Git: ("/data/UShammerMethodBG.R)                                               #
+# data source(s): tidycensus, tigris, and NHGIS                                  #
+#                                                                                #
+#                                                                                #
 #*********************************************************************************
 
 library(tidyverse)
 library(tidycensus)
-library(magrittr)
-library(stringr)
 library(tigris)
-library(viridis)
-library(sf)
-library(sp)
-library(rgdal)
 library(tmap)
 library(tmaptools)
+library(sf)
+library(magrittr)
+library(purrr)
+options(tigris_use_cache = TRUE)
+
+#library(stringr)
+#library(viridis)
+library(rgdal)
 library(ggplot2)
-library(janitor)
+#library(janitor)
 library(maptools)
 library(htmlwidgets)
 library(leaflet)
-options(tigris_use_cache = TRUE)
-
-th_api_acs <- '45544f0d114cfaa037a5566745d18bb8d4778cfa'
-
-census_api_key('45544f0d114cfaa037a5566745d18bb8d4778cfa', install = TRUE)
-
-?census_api_key
-Sys.getenv("CENSUS_API_KEY")
 
 
-load_variables(year = 2015, dataset = "acs5") %>% View
+#th_api_acs <- '45544f0d114cfaa037a5566745d18bb8d4778cfa'
+#census_api_key('45544f0d114cfaa037a5566745d18bb8d4778cfa', install = TRUE)
+
+#core_based_statistical_areas
+#core_based_statistical_areas(cb = FALSE, resolution = "500k", year = NULL,
+#                             ...)
+
+#load_variables(year = 2015, dataset = "acs5") %>% View
 #load_variables(year = 2010, dataset = "acs5") %>% View
 
-USbg <- read.csv("Dropbox/hafley/urbanization/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
+USbg <- read.csv("data/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
 #for scott's computer:
 #USbg <- read.csv("C:/Users/scott/Dropbox/hafley/urbanization/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
 USbg <- as_tibble(USbg)
@@ -47,7 +49,7 @@ USbg <- USbg[,-(c(3,4,9,10,13:37))]
 USbg$COUNTYJ <- str_sub(USbg$GISJOIN, 1, 8)
 
 # USarea is the square miles of each block group
-USarea <- read.csv("Dropbox/hafley/urbanization/areas.txt")
+USarea <- read.csv("data/areas.txt")
 #for scott's computer:
 #USarea <- read.csv("C:/Users/scott/Dropbox/hafley/urbanization/areas.txt")
 USarea <- as_tibble(USarea)
@@ -58,12 +60,10 @@ USarea <- USarea[,-(c(7:9))]
 USbg2 <- left_join(x = USbg, y = USarea, by = "GISJOIN")
 
 USbg2 %>%
-  rename(geoid = GEOID)
-
-USbg2$GEOID
+  rename(geoid = GEOID) -> USbg2
 
 #read in housing unit by year Census
-hu1940 <- read.csv("Dropbox/hafley/urbanization/nhgis0022_csv/nhgis0022_ds78_1940_county.csv")
+hu1940 <- read.csv("data/nhgis0022_csv/nhgis0022_ds78_1940_county.csv")
 #for scott's computer:
 #hu1940 <- read.csv("C:/Users/scott/Dropbox/hafley/urbanization/nhgis0022_csv/nhgis0022_ds78_1940_county.csv")
 hu1940 <- as_tibble(hu1940)
@@ -72,14 +72,13 @@ str(hu1940)
 
 #for scott's computer (shoulda done setwd sooner....):
 #setwd("C:/Users/scott")
-hu1970 <- read_csv("Dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds94_1970_county.csv")
-hu1980 <- read_csv("Dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds104_1980_county.csv")
-hu1990 <- read_csv("Dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds120_1990_county.csv")
-hu2000 <- read_csv("Dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds146_2000_county.csv")
-hu2010 <- read.csv("Dropbox/hafley/urbanization/nhgis0026_csv/nhgis0026_ds172_2010_county.csv")
+hu1970 <- read_csv("data/nhgis0025_csv/nhgis0025_ds94_1970_county.csv")
+hu1980 <- read_csv("data/nhgis0025_csv/nhgis0025_ds104_1980_county.csv")
+hu1990 <- read_csv("../../../../dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds120_1990_county.csv")
+hu2000 <- read_csv("../../../../dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds146_2000_county.csv")
+hu2010 <- read.csv("data/nhgis0026_csv/nhgis0026_ds172_2010_county.csv")
 hu2010 <- as_tibble(hu2010)
 str(hu2010)
-
 
 # modify by Year Census
 hu1940 <- hu1940[,-(c(3:7,9))]
@@ -102,21 +101,21 @@ hu2000 %<>%
 hu2010 %<>%
   rename(COUNTYJ = GISJOIN)
 
-#str(hu2010$COUNTYJ)
-#hu1940$COUNTYJ <- as.factor(hu1940$COUNTYJ)
-#str(hu1940)
 
-test1 <- left_join(USbg2,hu1940, by = ("COUNTYJ"))
-test1 <- left_join(test1,hu1970, by = "COUNTYJ")
-test1 <- left_join(test1,hu1980, by = "COUNTYJ")
-test1 <- left_join(test1,hu1990, by = "COUNTYJ")
-test1 <- left_join(test1,hu2000, by = "COUNTYJ")
-test1 <- left_join(test1,hu2010, by = "COUNTYJ")
+# join historic census data with block group data
+US_bg <- reduce(list(USbg2,hu1940,hu1970,hu1980,hu1990,hu2000,hu2010), left_join, by = "COUNTYJ")
 
-test1 <- test1 %>%
+# rename variables for historic census housing units
+US_bg <- US_bg %>%
   rename(hu40 = BXR001, hu70 = CBV001, hu80 = C8Y001, hu90 = ESA001, hu00 =FKI001, hu10 = IFC001)
 
-test1a <- test1 %>%
+
+# jXX = total number of housing units in county during time t, based on year structure built in ACS
+# iXX = total number of housing units in block group during time t, based on year structure built in ACS
+# adjXX = adjusted number of housing units in block group, hammer method output
+# additional reference: https://www.nature.com/articles/nclimate2961#methods
+
+US_bg2 <- US_bg %>%
   group_by(COUNTYJ) %>%
   mutate(
     j70 = sum(ADQSE008, ADQSE009, ADQSE010, ADQSE011),
@@ -129,41 +128,41 @@ test1a <- test1 %>%
     i90 = (ADQSE006 + ADQSE007 + ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
     i00 = (ADQSE005 + ADQSE006 + ADQSE007 + ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
     i10 = (ADQSE004 + ADQSE005 + ADQSE006 + ADQSE007 + ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
-    adj40a = (hu40/sum(ADQSE011)*ADQSE011),
-    adj70a = hu70/j70 * i70,
-    adj80a = hu80/j80 * i80,
-    adj90a = hu90/j90 * i90,
-    adj00a = hu00/j00 * i00,
-    adj10a = hu10/j10 * i10
+    adj40 = (hu40/sum(ADQSE011)*ADQSE011),
+    adj70 = hu70/j70 * i70,
+    adj80 = hu80/j80 * i80,
+    adj90 = hu90/j90 * i90,
+    adj00 = hu00/j00 * i00,
+    adj10 = hu10/j10 * i10
   )
 
-#test1a %>%
-#  filter(i10 < i00)
+US_bg2$COUNTYJ <- as.factor(US_bg2$COUNTYJ)
+str(US_bg2$COUNTYJ)
 
-test1a$COUNTYJ <- as.factor(test1a$COUNTYJ)
+
+# huXX_sqmi = housing units/square mile
+US_bg2 <- US_bg2 %>%
+  group_by(COUNTYJ) %>%
+  mutate(
+    hu40_sqmi = adj40/area,
+    hu70_sqmi = adj70/area,
+    hu80_sqmi = adj80/area,
+    hu90_sqmi = adj90/area,
+    hu00_sqmi = adj00/area,
+    hu10_sqmi = adj10/area
+  )
+
+test1c <- ungroup(test1c)
+
+
 
 # example
-test1a %>%
+US_bg2 %>%
   group_by(COUNTYJ) %>%
   summarize(
     sum(ADQSE011)
   )
 
-test1c$ham40
-
-# ham = housing units/square mile
-test1c <- test1a %>%
-  group_by(COUNTYJ) %>%
-  mutate(
-    ham40 = adj40a/area,
-    ham70 = adj70a/area,
-    ham80 = adj80a/area,
-    ham90 = adj90a/area,
-    ham00 = adj00a/area,
-    ham10 = adj10a/area
-  )
-
-test1c <- ungroup(test1c)
 
 # skip for now, commented out
 #test1c$urb40 <- ''
@@ -199,35 +198,25 @@ test1c <- ungroup(test1c)
 #ggplot(test1c, mapping = aes(x = urb10)) +
 #  geom_histogram(stat = 'count')
 
-#test1c %>%
+#US_bg2 %>%
 #  group_by(COUNTYJ) %>%
 #  ggplot(mapping = aes(x = urb40)) +
 #  geom_histogram(stat = 'count')
 
 
-####################################
-##### MESSAGE TO SCOTT
-##### Date: January 17, 2018
 
-# test1c represents a complete dataset. Includes adjusted housing units, hammer hu, and urban classification
-
-# i'm just messing around in lines after 180; none of this produces anything particularly meaningful
-# I have pretty good visualizations for the ATLANTA only region in a separate file. Will add to the dropbox soon
-
-
-# slow and ineffective visually
-test1c %>% 
-  filter(STATEA == 13 & ham90 >10 & ham90 < 800) %>%
-  ggplot((mapping = aes(x = ham90)))+
+US_bg2 %>% 
+  filter(STATEA == 13 & COUNTYA < 25 & hu90_sqmi >10 & hu90_sqmi < 800) %>%
+  ggplot((mapping = aes(x = hu90_sqmi)))+
   geom_histogram() +
   facet_wrap('COUNTYJ')
 
-test1c %>% 
+US_bg2 %>% 
   filter(STATEA == 13 & COUNTYA < 25) %>%
-  ggplot((mapping = aes(x=COUNTYA, y = ham40, group = COUNTYA)))+
+  ggplot((mapping = aes(x=COUNTYA, y = hu40_sqmi, group = COUNTYA)))+
   geom_boxplot()
 
-write_csv(test1c,"Dropbox/hafley/urbanization/test1c.csv") #If you want to save as a file
+# write_csv(test1c,"Dropbox/hafley/urbanization/test1c.csv") #If you want to save as a file
 
 # this is the 'end'
 
