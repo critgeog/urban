@@ -15,7 +15,7 @@ There are three primary files:
 
 2. [bg_hammer.R](scripts/bg_hammer.R) : This script reads in data and calculates the number of housing units per square mile by block group, nationwide, using the Hammer Method. Script reads in 'Year Structure Built' block group data from the 2011-15 ACS, block group area in square miles, and reads in h_units_national.csv to join. 
 
-3. ct_hammer.R : This script reads in data and calculates the number of housing units per square mile by census tract, nationwide, using the Hammer Method.  Script reads in 'Year Structure Built' census tract data from the 2011-15 ACS, census tract area in square miles, and reads in h_units_national.csv to join. 
+3. [ct_hammer.R](scripts/ct_hammer.R) : This script reads in data and calculates the number of housing units per square mile by census tract, nationwide, using the Hammer Method.  Script reads in 'Year Structure Built' census tract data from the 2011-15 ACS, census tract area in square miles, and reads in h_units_national.csv to join. 
 
 
 Finally, [UShammerMethodBG](scripts/UShammerMethodBG.R) is a complete script. Essentially, it is a combination of h_units.R and bg_hammer.R where I did my initial analysis. I separted it into two scripts to keep hopefully make things a bit easier to follow. It includes step-by-step calculations of the number of housing units per square mile in each block group, nationwide. You shouldn't need this, but if you encounter problems in scripts #1 or #2 listed above, this is a good place to look.
