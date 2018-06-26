@@ -97,10 +97,10 @@ hu2010 <- read_csv("data/nhgis0026_csv/nhgis0026_ds172_2010_county.csv") %>%
          h_units = IFC001)
 
 
-# bind separate decades to one tibble
+# bind separate decades to one tibble ('long' format)
 h2 <- bind_rows(hu1940,hu1950_60,hu1970,hu1980,hu1990,hu2000,hu2010)
 
-
+# transpose to 'wide' format
 h3 <- h2 %>%
   spread(YEAR,h_units) %>%
   rename(hu40 = `1940`,
@@ -112,7 +112,15 @@ h3 <- h2 %>%
          hu00 = `2000`,
          hu10 = `2010`)
 
+#write_csv(h3, "csv/h_units_national.csv")
+
+# clean environment
+rm(hu1940, hu1950_60, hu1970, hu1980, hu1990, hu2000, hu2010)
+
+
+# join county housing units to block group tibble
 US_bg3 <- left_join(USbg2,h3, by = 'COUNTYJ')
+
 
 # jXX = total number of housing units in county during time t, based on year structure built in ACS
 # iXX = total number of housing units in block group during time t, based on year structure built in ACS
@@ -155,11 +163,9 @@ US_bg3 <- US_bg3 %>%
     hu10_sqmi = adj10/area
   )
 
-# US_bg2 is a complete dataset. It includes adjusted housing units, and housing units
+# US_bg3 is a complete dataset. It includes adjusted housing units, and housing units
 # per square mile for each block group. I create urban classifications in 'suburbanBG.R'
 
-
-#write.csv(test1c,"desktop/tempNHGIS/current projects/urban/usbgham.csv")
 
 
 labels <- c(G1300670 = 'Cobb', G1301210 = 'Fulton', G1300890 = 'DeKalb',
