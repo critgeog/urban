@@ -11,18 +11,19 @@ Scott - The 1990 and 2000 county-level data is located in our shared dropbox. It
 
 #### Scripts
 There are three primary files:
-1. [h_units.R](scripts/h_units.R): this file reads in, cleans, and combines separate county-level housing units from 1940-2010 into a single file [h_units_national.csv](data/h_units_national.csv)
+1. [h_units.R](scripts/h_units.R): This script reads in, cleans, and combines the separate county-level housing units from 1940-2010 into a single file [h_units_national.csv](data/h_units_national.csv)
 
-2. [bg_hammer.R](scripts/bg_hammer.R) : This script reads in all data necessary to calculate number of housing units per square mile by block group, nationwide, using the Hammer Method.  Script reads in 'Year Structure Built' block group data from the 2011-15 ACS, block group area in square miles, and reads in h_units to join. 
+2. [bg_hammer.R](scripts/bg_hammer.R) : This script reads in data and calculates the number of housing units per square mile by block group, nationwide, using the Hammer Method. Script reads in 'Year Structure Built' block group data from the 2011-15 ACS, block group area in square miles, and reads in h_units_national.csv to join. 
 
-3. ct_hammer : This script reads in all data necessary to calculate number of housing units per square mile by census tract, nationwide, using the Hammer Method.  Script reads in 'Year Structure Built' census tract data from the 2011-15 ACS, census tract area in square miles, and reads in h_units to join. 
+3. ct_hammer.R : This script reads in data and calculates the number of housing units per square mile by census tract, nationwide, using the Hammer Method.  Script reads in 'Year Structure Built' census tract data from the 2011-15 ACS, census tract area in square miles, and reads in h_units_national.csv to join. 
 
-Finally, [UShammerMethodBG](scripts/UShammerMethodBG.R) is a complete script. Essentially, it is a combination of h_units.R and bg_hammer.R that I did my initial analysis in. I separted this into two scripts to hopefully make things a bit easier to follower. It includes step-by-step calculations of the number of housing units per square mile in each block group, nationwide. You shouldn't need this, but if you encounter problems in scripts #1 or #2 listed above, this is a place to look.
 
-This script reads in all data necessary to calculate adjusted housing units using the Hammer Method. All data is located in the 'data' folder. This script reads in 'Year Structure Built' block group data from the 2011-15 ACS block group data; a BG .txt file where block group areas were calculated in ArcGIS after reprojecting NHGIS data; and county-level historical counts of housing units (1950 and 1960 are from mhauer; all other decades were downloaded from NHGIS). 
+Finally, [UShammerMethodBG](scripts/UShammerMethodBG.R) is a complete script. Essentially, it is a combination of h_units.R and bg_hammer.R where I did my initial analysis. I separted it into two scripts to keep hopefully make things a bit easier to follow. It includes step-by-step calculations of the number of housing units per square mile in each block group, nationwide. You shouldn't need this, but if you encounter problems in scripts #1 or #2 listed above, this is a good place to look.
 
-Similarly, [UShammerMethodCT](scripts/UShammerCT.R) is modeled after its BG counterpart, instead yielding the number of housing units per square mile at the census tract level, nationwide. The steps are the same, but the results are aggregated to a different sub-geography. In this script, I do not read in each separate county-level historical counts of housing units, I just read in the file generated in [UShammerMethodBG](scripts/UShammerMethodBG.R). 
+This script reads in all data necessary to use the Hammer Method to calculate adjusted housing units.Data is located in the 'data' folder. This script reads in 'Year Structure Built' block group data from the 2011-15 ACS block group data; a BG .txt file where block group areas were calculated in ArcGIS after reprojecting NHGIS data; and county-level historic housing units (1950 and 1960 are from matt hauer; all other decades were downloaded from NHGIS). 
+
+Similarly, [UShammerMethodCT](scripts/UShammerCT.R) is modeled after its BG counterpart, instead yielding the number of housing units per square mile at the census tract level, nationwide. The steps are the same, but the results are aggregated to a different sub-geography. In this script, I do not read in each separate historic count of county-level housing units; I just read in the file generated in [h_units.R](scripts/h_units.R). 
 
 
 ### additional notes
-I have some animations that I've been working on that are not on the GitHub. I will load them in very soon.
+I have some visualizations and animations that I've been working on that are not on the GitHub. I will load them in soon.

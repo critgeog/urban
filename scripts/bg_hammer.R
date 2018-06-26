@@ -168,5 +168,3 @@ US_bg2$urb80 <- as.factor(US_bg2$urb80)
 US_bg2$urb90 <- as.factor(US_bg2$urb90)
 US_bg2$urb00 <- as.factor(US_bg2$urb00)
 US_bg2$urb10 <- as.factor(US_bg2$urb10)
-
-US_bg2

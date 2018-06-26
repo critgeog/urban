@@ -132,17 +132,23 @@ US_bg3 <- left_join(USbg2,h3, by = 'COUNTYJ')
 US_bg3 <- US_bg3 %>%
   group_by(COUNTYJ) %>%
   mutate(
+    j50 = sum(ADQSE010, ADQSE011),
+    j60 = sum(ADQSE009, ADQSE010, ADQSE011),
     j70 = sum(ADQSE008, ADQSE009, ADQSE010, ADQSE011),
     j80 = sum(ADQSE007,ADQSE008, ADQSE009, ADQSE010, ADQSE011),
     j90 = sum(ADQSE006,ADQSE007,ADQSE008, ADQSE009, ADQSE010, ADQSE011),
     j00 = sum(ADQSE005,ADQSE006,ADQSE007,ADQSE008, ADQSE009, ADQSE010, ADQSE011),
     j10 = sum(ADQSE004,ADQSE005,ADQSE006,ADQSE007,ADQSE008, ADQSE009, ADQSE010, ADQSE011),
+    i50 = (ADQSE010 + ADQSE011),
+    i60 = (ADQSE009 + ADQSE010 + ADQSE011),
     i70 = (ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
     i80 = (ADQSE007 + ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
     i90 = (ADQSE006 + ADQSE007 + ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
     i00 = (ADQSE005 + ADQSE006 + ADQSE007 + ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
     i10 = (ADQSE004 + ADQSE005 + ADQSE006 + ADQSE007 + ADQSE008 + ADQSE009 + ADQSE010 + ADQSE011),
     adj40 = (hu40/sum(ADQSE011)*ADQSE011),
+    adj50 = hu50/j50 * i50,
+    adj60 = hu60/j60 * i60,
     adj70 = hu70/j70 * i70,
     adj80 = hu80/j80 * i80,
     adj90 = hu90/j90 * i90,
@@ -158,6 +164,8 @@ US_bg3 <- US_bg3 %>%
   group_by(COUNTYJ) %>%
   mutate(
     hu40_sqmi = adj40/area,
+    hu50_sqmi = adj50/area,
+    hu60_sqmi = adj60/area,
     hu70_sqmi = adj70/area,
     hu80_sqmi = adj80/area,
     hu90_sqmi = adj90/area,
@@ -200,30 +208,39 @@ US_bg2 %>%
   group_by(COUNTYJ) %>%
   summarize(
     sum(ADQSE011)
-  )
-
+)
 
 # skip for now, commented out
-#test1c$urb40 <- ''
-#test1c[,'urb40'] <- sapply(test1c[,'ham40'],function(x)ifelse(x > 200,1,0))
-#test1c$urb40 <- as.factor(test1c$urb40)
+#US_bg2$urb40 <- ''
+#US_bg2[,'urb40'] <- sapply(US_bg2[,'hu40_sqmi'],function(x)ifelse(x > 200,1,0))
+#US_bg2$urb40 <- as.factor(US_bg2$urb40)
 
 # set up urban classification
-#test1c$urb70 <- ''
-#test1c$urb80 <- ''
-#test1c$urb90 <- ''
-#test1c$urb00 <- ''
-#test1c$urb10 <- ''
+#US_bg2$urb50 <- ''
+#US_bg2$urb60 <- ''
+#US_bg2$urb70 <- ''
+#US_bg2$urb80 <- ''
+#US_bg2$urb90 <- ''
+#US_bg2$urb00 <- ''
+#US_bg2$urb10 <- ''
 
-# determine if area is urban. If ham > 200, then bg is urban
-#test1c[,'urb70'] <- ifelse((test1c$ham70 > 200 | test1c$urb40 == 1),1,0)
-#test1c[,'urb80'] <- ifelse((test1c$ham80 > 200 | test1c$urb70 == 1),1,0)
-#test1c[,'urb90'] <- ifelse((test1c$ham90 > 200 | test1c$urb80 == 1),1,0)
-#test1c[,'urb00'] <- ifelse((test1c$ham00 > 200 | test1c$urb90 == 1),1,0)
-#test1c[,'urb10'] <- ifelse((test1c$ham10 > 200 | test1c$urb00 == 1),1,0)
+# determine if area is urban. If huXX_sqmi > 200 or if previous decade is
+# classified as urban, then bg is urban, according to this approach
+#US_bg2[,'urb50'] <- ifelse((US_bg2$hu50_sqmi > 200 | US_bg2$urb40 == 1),1,0)
+#US_bg2[,'urb60'] <- ifelse((US_bg2$hu60_sqmi > 200 | US_bg2$urb50 == 1),1,0)
+#US_bg2[,'urb70'] <- ifelse((US_bg2$hu70_sqmi > 200 | US_bg2$urb40 == 1),1,0)
+#US_bg2[,'urb80'] <- ifelse((US_bg2$hu80_sqmi > 200 | US_bg2$urb70 == 1),1,0)
+#US_bg2[,'urb90'] <- ifelse((US_bg2$hu90_sqmi > 200 | US_bg2$urb80 == 1),1,0)
+#US_bg2[,'urb00'] <- ifelse((US_bg2$hu00_sqmi > 200 | US_bg2$urb90 == 1),1,0)
+#US_bg2[,'urb10'] <- ifelse((US_bg2$hu10_sqmi > 200 | US_bg2$urb00 == 1),1,0)
 
-#test1c$urb70 <- as.factor(test1c$urb70)
-#test1c$urb80 <- as.factor(test1c$urb80)
-#test1c$urb90 <- as.factor(test1c$urb90)
-#test1c$urb00 <- as.factor(test1c$urb00)
-#test1c$urb10 <- as.factor(test1c$urb10)
+
+# convert to factors
+#US_bg2$urb40 <- as.factor(US_bg2$urb40)
+#US_bg2$urb50 <- as.factor(US_bg2$urb50)
+#US_bg2$urb60 <- as.factor(US_bg2$urb60)
+#US_bg2$urb70 <- as.factor(US_bg2$urb70)
+#US_bg2$urb80 <- as.factor(US_bg2$urb80)
+#US_bg2$urb90 <- as.factor(US_bg2$urb90)
+#US_bg2$urb00 <- as.factor(US_bg2$urb00)
+#US_bg2$urb10 <- as.factor(US_bg2$urb10)
