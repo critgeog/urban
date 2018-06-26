@@ -50,6 +50,8 @@ USbg2 <- USbg %>%
   left_join(x = USbg, y = bg_area, by = "GISJOIN") %>%
   rename(geoid = GEOID)
 
+#write_csv(USbg2, "data/USbg2.csv")
+
 #read in housing unit by year Census
 hu1940 <- read_csv("data/nhgis0022_csv/nhgis0022_ds78_1940_county.csv") %>%
   select(-c(3:7,9)) %>%
@@ -163,6 +165,8 @@ US_bg3 <- US_bg3 %>%
     hu10_sqmi = adj10/area
   )
 
+write_csv(US_bg3, "csv/blk_grp_complete.csv")
+
 # US_bg3 is a complete dataset. It includes adjusted housing units, and housing units
 # per square mile for each block group. I create urban classifications in 'suburbanBG.R'
 
@@ -223,20 +227,3 @@ US_bg2 %>%
 #test1c$urb90 <- as.factor(test1c$urb90)
 #test1c$urb00 <- as.factor(test1c$urb00)
 #test1c$urb10 <- as.factor(test1c$urb10)
-
-
-
-# compare number of urban block groups in 1940 w/ 2010
-#ggplot(test1c, mapping = aes(x = urb40)) +
-#  geom_histogram(stat = 'count')
-
-#ggplot(test1c, mapping = aes(x = urb10)) +
-#  geom_histogram(stat = 'count')
-
-#US_bg2 %>%
-#  group_by(COUNTYJ) %>%
-#  ggplot(mapping = aes(x = urb40)) +
-#  geom_histogram(stat = 'count')
-
-
-

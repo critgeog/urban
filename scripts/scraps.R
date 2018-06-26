@@ -1,5 +1,13 @@
 # old_code
 
+#core_based_statistical_areas
+#core_based_statistical_areas(cb = FALSE, resolution = "500k", year = NULL,
+#                             ...)
+
+#load_variables(year = 2015, dataset = "acs5") %>% View
+#load_variables(year = 2010, dataset = "acs5") %>% View
+
+
 
 USbg <- USbg[,-(c(3,4,9,10,13:37))]
 
@@ -29,6 +37,36 @@ hu2000 %<>%
 hu2010 %<>%
   rename(COUNTYJ = GISJOIN)
 
+# modify by Year Census
+hu1940 <- hu1940 %>%
+  select(-c(3:7,9)) %>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = BXR001)
+
+hu1970 <- hu1970 %>%
+  select(-c(3:7)) %>%
+  rename(COUNTYJ = GISJOIN, 
+         h_units = CBV001)
+
+hu1980 <- hu1980 %>%
+  select(-c(3:10))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = C8Y001)
+
+hu1990 <- hu1990 %>%
+  select(-c(3:16))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = ESA001)
+
+hu2000 <- hu2000 %>%
+  select(-c(3:12))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = FKI001)
+
+hu2010 <- hu2010 %>%
+  select(-c(3:39))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = IFC001)
 
 
 h1 <- old_hu2 %>%
@@ -39,6 +77,11 @@ h1 %>%
   spread(YEAR, h_units)
 
 h1$YEAR <- as.character(h1$YEAR)
+
+#mutate(GEOID = str_sub(FIPS, 3,2 ) <- '0')
+#old_hu2 <- old_hu2 %>%
+#  rename(hu40 = BXR001, hu70 = CBV001, hu80 = C8Y001, hu90 = ESA001, hu00 =FKI001, hu10 = IFC001) %>%
+#  select(-c(2,4,6,8,10,12))
 
 old_hu2 %>%
   rename(h_units = BXR001) %>%
@@ -262,3 +305,20 @@ tm_shape(acsjoin) +
   tm_polygons("hopct10", title = "H.O difference") +
   tm_facets("COUNTYJ") +
   tm_style_grey()
+
+
+
+# compare number of urban block groups in 1940 w/ 2010
+#ggplot(test1c, mapping = aes(x = urb40)) +
+#  geom_histogram(stat = 'count')
+
+#ggplot(test1c, mapping = aes(x = urb10)) +
+#  geom_histogram(stat = 'count')
+
+#US_bg2 %>%
+#  group_by(COUNTYJ) %>%
+#  ggplot(mapping = aes(x = urb40)) +
+#  geom_histogram(stat = 'count')
+
+
+
