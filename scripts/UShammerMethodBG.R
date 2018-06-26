@@ -1,11 +1,11 @@
 #*********************************************************************************
 # original created: March 30, 2017                                               #
-# file created: November 10, 2017                                                #
 # by: Taylor Hafley                                                              #
-# last modified: 6.4.18                                                          #
+# last modified: 6.25.18                                                         #
 # local wd ("Google Drive/school/R/urban/data)                                   #
+# (dropbox/Projects/InProgress/urban                                             #
 # Git: ("/data/UShammerMethodBG.R)                                               #
-# data source(s): tidycensus, tigris, and NHGIS                                  #
+# data source(s): tidycensus, tigris, NHGIS, and M. Hauer                        #
 #                                                                                #
 #                                                                                #
 #*********************************************************************************
@@ -13,109 +13,113 @@
 library(tidyverse)
 library(tidycensus)
 library(tigris)
+options(tigris_use_cache = TRUE)
+options(tigris_class = "sf")
 library(tmap)
 library(tmaptools)
 library(sf)
 library(magrittr)
 library(purrr)
-options(tigris_use_cache = TRUE)
-
-#library(stringr)
-#library(viridis)
-library(rgdal)
 library(ggplot2)
-#library(janitor)
-library(maptools)
-library(htmlwidgets)
-library(leaflet)
+library(readxl)
 
-
-#th_api_acs <- '45544f0d114cfaa037a5566745d18bb8d4778cfa'
-#census_api_key('45544f0d114cfaa037a5566745d18bb8d4778cfa', install = TRUE)
-
-#core_based_statistical_areas
-#core_based_statistical_areas(cb = FALSE, resolution = "500k", year = NULL,
-#                             ...)
-
-#load_variables(year = 2015, dataset = "acs5") %>% View
-#load_variables(year = 2010, dataset = "acs5") %>% View
-
-USbg <- read.csv("data/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
+# read in housing units by 'year structure built' from 2011-15 ACS, downloaded from NHGIS
+# metadata: data/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp_codebook.txt
+USbg <- read_csv("data/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
 #for scott's computer:
 #USbg <- read.csv("C:/Users/scott/Dropbox/hafley/urbanization/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
-USbg <- as_tibble(USbg)
-head(USbg)
-USbg <- USbg[,-(c(3,4,9,10,13:37))]
-USbg$COUNTYJ <- str_sub(USbg$GISJOIN, 1, 8)
 
-# USarea is the square miles of each block group
-USarea <- read.csv("data/areas.txt")
+# clean tibble
+USbg <- USbg %>%
+  select(-c(3,4,9,10,13:37)) %>%
+  mutate(COUNTYJ = str_sub(GISJOIN, 1, 8))
+
+# read block group area
+# area unit: square miles of each block group.
+# area calculated in ArcGIS; area calculated in equal area projection
+bg_area <- read_csv("data/areas.txt")
 #for scott's computer:
 #USarea <- read.csv("C:/Users/scott/Dropbox/hafley/urbanization/areas.txt")
-USarea <- as_tibble(USarea)
-head(USarea)
-USarea <- USarea[,-(c(7:9))]
 
-# join area earlier
-USbg2 <- left_join(x = USbg, y = USarea, by = "GISJOIN")
+# remove unecessary columns
+bg_area <- bg_area %>%
+  select(-c(7:9))
 
-USbg2 %>%
-  rename(geoid = GEOID) -> USbg2
+# join area to 'Year Structure Built' tibble
+USbg2 <- USbg %>%
+  left_join(x = USbg, y = bg_area, by = "GISJOIN") %>%
+  rename(geoid = GEOID)
 
 #read in housing unit by year Census
-hu1940 <- read.csv("data/nhgis0022_csv/nhgis0022_ds78_1940_county.csv")
+hu1940 <- read_csv("data/nhgis0022_csv/nhgis0022_ds78_1940_county.csv") %>%
+  select(-c(3:7,9)) %>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = BXR001)
 #for scott's computer:
 #hu1940 <- read.csv("C:/Users/scott/Dropbox/hafley/urbanization/nhgis0022_csv/nhgis0022_ds78_1940_county.csv")
-hu1940 <- as_tibble(hu1940)
-hu1940$COUNTYA <- as.integer(hu1940$COUNTYA/10)
-str(hu1940)
 
 #for scott's computer (shoulda done setwd sooner....):
-#setwd("C:/Users/scott")
-hu1970 <- read_csv("data/nhgis0025_csv/nhgis0025_ds94_1970_county.csv")
-hu1980 <- read_csv("data/nhgis0025_csv/nhgis0025_ds104_1980_county.csv")
-hu1990 <- read_csv("../../../../dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds120_1990_county.csv")
-hu2000 <- read_csv("../../../../dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds146_2000_county.csv")
-hu2010 <- read.csv("data/nhgis0026_csv/nhgis0026_ds172_2010_county.csv")
-hu2010 <- as_tibble(hu2010)
-str(hu2010)
+#setwd("C:/Users/scott"))
 
-# modify by Year Census
-hu1940 <- hu1940[,-(c(3:7,9))]
-hu1970 <- hu1970[,-(3:7)]
-hu1980 <- hu1980[,-(c(3:10))]
-hu1990 <- hu1990[,-(c(3:16))]
-hu2000 <- hu2000[,-(c(3:12))]
-hu2010 <- hu2010[,-(c(3:39))]
+hu1950_60 <- read_xlsx("data/hammer_50_60.xlsx") %>%
+  gather(YEAR,"h_units","h1950",5:6) %>%       # 1950 and 1960 housing units in one colum
+  mutate(COUNTYJ = str_c("G", FIPS, "0"),        # initial step to match NHGIS data
+         YEAR = as.integer(substring(YEAR, 2))) %>%
+  select(COUNTYJ, YEAR, h_units)
 
-hu1940 %<>%
- rename(COUNTYJ = GISJOIN)
-hu1970 %<>%
-  rename(COUNTYJ = GISJOIN)
-hu1980 %<>%
-  rename(COUNTYJ = GISJOIN)
-hu1990 %<>%
-  rename(COUNTYJ = GISJOIN)
-hu2000 %<>%
-  rename(COUNTYJ = GISJOIN)
-hu2010 %<>%
-  rename(COUNTYJ = GISJOIN)
+# add '0' to match NHGIS data
+# there has to be a better way to add this '0'  
+str_sub(hu1950_60$COUNTYJ, 4,3 ) <- '0'
+
+hu1970 <- read_csv("data/nhgis0025_csv/nhgis0025_ds94_1970_county.csv") %>%
+  select(-c(3:7)) %>%
+  rename(COUNTYJ = GISJOIN, 
+         h_units = CBV001)
+
+hu1980 <- read_csv("data/nhgis0025_csv/nhgis0025_ds104_1980_county.csv") %>%
+  select(-c(3:10))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = C8Y001)
+
+hu1990 <- read_csv("../../../../dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds120_1990_county.csv")%>%
+  select(-c(3:16))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = ESA001)
+
+hu2000 <- read_csv("../../../../dropbox/hafley/urbanization/nhgis0025_csv/nhgis0025_ds146_2000_county.csv")%>%
+  select(-c(3:12))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = FKI001)
+
+hu2010 <- read_csv("data/nhgis0026_csv/nhgis0026_ds172_2010_county.csv") %>%
+  select(-c(3:39))%>%
+  rename(COUNTYJ = GISJOIN,
+         h_units = IFC001)
 
 
-# join historic census data with block group data
-US_bg <- reduce(list(USbg2,hu1940,hu1970,hu1980,hu1990,hu2000,hu2010), left_join, by = "COUNTYJ")
+# bind separate decades to one tibble
+h2 <- bind_rows(hu1940,hu1950_60,hu1970,hu1980,hu1990,hu2000,hu2010)
 
-# rename variables for historic census housing units
-US_bg <- US_bg %>%
-  rename(hu40 = BXR001, hu70 = CBV001, hu80 = C8Y001, hu90 = ESA001, hu00 =FKI001, hu10 = IFC001)
 
+h3 <- h2 %>%
+  spread(YEAR,h_units) %>%
+  rename(hu40 = `1940`,
+         hu50 = `1950`,
+         hu60 = `1960`,
+         hu70 = `1970`,
+         hu80 = `1980`,
+         hu90 = `1990`,
+         hu00 = `2000`,
+         hu10 = `2010`)
+
+US_bg3 <- left_join(USbg2,h3, by = 'COUNTYJ')
 
 # jXX = total number of housing units in county during time t, based on year structure built in ACS
 # iXX = total number of housing units in block group during time t, based on year structure built in ACS
 # adjXX = adjusted number of housing units in block group, hammer method output
 # additional reference: https://www.nature.com/articles/nclimate2961#methods
 
-US_bg2 <- US_bg %>%
+US_bg3 <- US_bg3 %>%
   group_by(COUNTYJ) %>%
   mutate(
     j70 = sum(ADQSE008, ADQSE009, ADQSE010, ADQSE011),
@@ -134,14 +138,13 @@ US_bg2 <- US_bg %>%
     adj90 = hu90/j90 * i90,
     adj00 = hu00/j00 * i00,
     adj10 = hu10/j10 * i10
+  ) %>%
+  ungroup(US_bg2) %>%
+  mutate(COUNTYJ = as_factor(COUNTYJ)
   )
 
-US_bg2$COUNTYJ <- as.factor(US_bg2$COUNTYJ)
-str(US_bg2$COUNTYJ)
-
-
 # huXX_sqmi = housing units/square mile
-US_bg2 <- US_bg2 %>%
+US_bg3 <- US_bg3 %>%
   group_by(COUNTYJ) %>%
   mutate(
     hu40_sqmi = adj40/area,
@@ -152,7 +155,33 @@ US_bg2 <- US_bg2 %>%
     hu10_sqmi = adj10/area
   )
 
-test1c <- ungroup(test1c)
+# US_bg2 is a complete dataset. It includes adjusted housing units, and housing units
+# per square mile for each block group. I create urban classifications in 'suburbanBG.R'
+
+
+#write.csv(test1c,"desktop/tempNHGIS/current projects/urban/usbgham.csv")
+
+
+labels <- c(G1300670 = 'Cobb', G1301210 = 'Fulton', G1300890 = 'DeKalb',
+            G1301350 = 'Gwinnett', G1302190 = 'Oconee', G1300590 = 'Clarke')
+
+US_bg2 %>% 
+  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
+                                       'G1300590') & hu90_sqmi >10 & hu90_sqmi < 800) %>%
+  ggplot((mapping = aes(x = hu90_sqmi)))+
+  geom_histogram(bins = 10) +
+  labs(title = "1990 Housing Units", x = "hu/sq mi") +
+  facet_wrap('COUNTYJ', labeller = labeller(COUNTYJ = labels))
+
+
+US_bg2 %>% 
+  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
+                                       'G1300590')) %>%
+  ggplot(mapping = aes(x=COUNTYJ, y = hu40_sqmi)) +
+  geom_boxplot()
+
+# write_csv(test1c,"Dropbox/hafley/urbanization/test1c.csv") #If you want to save as a file
+
 
 
 
@@ -189,7 +218,7 @@ US_bg2 %>%
 #test1c$urb00 <- as.factor(test1c$urb00)
 #test1c$urb10 <- as.factor(test1c$urb10)
 
-#write.csv(test1c,"desktop/tempNHGIS/current projects/urban/usbgham.csv")
+
 
 # compare number of urban block groups in 1940 w/ 2010
 #ggplot(test1c, mapping = aes(x = urb40)) +
@@ -205,237 +234,3 @@ US_bg2 %>%
 
 
 
-US_bg2 %>% 
-  filter(STATEA == 13 & COUNTYA < 25 & hu90_sqmi >10 & hu90_sqmi < 800) %>%
-  ggplot((mapping = aes(x = hu90_sqmi)))+
-  geom_histogram() +
-  facet_wrap('COUNTYJ')
-
-US_bg2 %>% 
-  filter(STATEA == 13 & COUNTYA < 25) %>%
-  ggplot((mapping = aes(x=COUNTYA, y = hu40_sqmi, group = COUNTYA)))+
-  geom_boxplot()
-
-# write_csv(test1c,"Dropbox/hafley/urbanization/test1c.csv") #If you want to save as a file
-
-# this is the 'end'
-
-# data on # of homeowners in Fulton County
-df_acs15 <- get_acs(
-  geography = "block group",
-  county = c("Fulton","DeKalb","Gwinnett","Cherokee",
-             "Cobb","Douglas","Fayette","Clayton",
-             "Henry","Rockdale"),
-  state = "GA",
-  variables = c('B25003_001','B25003_002','B25003_003'), 
-  year = 2015,
-  key = th_api_acs,
-  geometry = TRUE,
-  output = 'wide'
-) %>% clean_names() %>%
-  rename(B25003_001_15 = b25003_001e, B25003_002_15 = b25003_002e, B25003_003_15 = b25003_003e) %>%
-  mutate(hopct15 = B25003_002_15/B25003_001_15*100)
-class(df_acs15)
-
-# data on # of poor people in ARC
-df_acs15 <- get_acs(
-  geography = "tract",
-  county = c("Fulton","DeKalb","Gwinnett","Cherokee",
-             "Cobb","Douglas","Fayette","Clayton",
-             "Henry","Rockdale"),
-  state = "GA",
-  variables = c('B17001_002E','B17001_002M','B01003_001E', 'B01003_001M'), 
-  year = 2015,
-  key = th_api_acs,
-  geometry = TRUE,
-  output = 'wide'
-) %>% clean_names() %>%
-    mutate(pov_pct = b17001_002e/b01003_001e*100,
-           pov_moe = b17001_002m/b01003_001m*100)
-class(df_acs15)
-
-
-# data on # of homeowners in Fulton County
-df_acs15 <- get_acs(
-  geography = "block group",
-  county = c("Clarke"), 
-             state = "OH",
-  variables = c(), 
-  year = 2015,
-  key = th_api_acs,
-  geometry = TRUE,
-  output = 'wide'
-) %>% clean_names() %>%
-  rename(B25003_001_15 = b25003_001e, B25003_002_15 = b25003_002e, B25003_003_15 = b25003_003e) %>%
-  mutate(hopct15 = B25003_002_15/B25003_001_15*100)
-class(df_acs15)
-
-# data on # of poor people in ARC
-df_acs15 <- get_acs(
-  geography = "block group",
-  county = c("Clark"), 
-  state = "OH",
-  variables = c('B17001_002E','B17001_002M','B01003_001E', 'B01003_001M','B25003_001','B25003_002','B25003_003'), 
-  year = 2015,
-  key = th_api_acs,
-  geometry = TRUE,
-  output = 'wide'
-) %>% clean_names() %>%
-  rename(B25003_001_15 = b25003_001e, B25003_002_15 = b25003_002e, B25003_003_15 = b25003_003e) %>%
-  mutate(hopct15 = B25003_002_15/B25003_001_15*100,
-         pov_pct = b17001_002e/b01003_001e*100,
-         pov_moe = b17001_002m/b01003_001m*100)
-class(df_acs15)
-
-test1c$area %>% b2 
-# now, Join 2010 "tbl_df" to 2015 "sf"
-
-#gaham <- test1c %>%
-#  filter(STATEA == 13)
-
-#acsjoin <- merge(x = df_acs15, y = gaham, by.x = 'geoid', by.y = 'GEOID')
-#acsjoin <- merge(x = df_acs15, y = test1c, by.x = 'geoid', by.y = 'GEOID')
-
-sprfldj <- merge(x = df_acs15, y = test1c, by.x = 'geoid', by.y = 'GEOID')
-
-# df_acs15 is poverty rates for Census Tracts in ARC
-sprfldj %>% View
-
-
-# ham = housing units/square mile
-sprfldj <- sprfldj %>%
-  group_by(COUNTYJ) %>%
-  mutate(
-    ham40 = adj40a/area,
-    ham70 = adj70a/area,
-    ham80 = adj80a/area,
-    ham90 = adj90a/area,
-    ham00 = adj00a/area,
-    ham10 = adj10a/area
-  )
-
-test1c <- ungroup(test1c)
-
-#acs1015 %<>%
-#  mutate(chg10_15 = (hopct15 - hopct10)) %>%
-#  mutate(tdiff10_15 = B25003_002_15 - B25003_002_10)
-
-# map the data
-sprfldj %>% 
-  ggplot()+
-  geom_sf(aes(fill = hopct15))+
-  scale_fill_viridis("urban classification")+
-  coord_sf(datum = NA)+
-  theme_void(base_family =  "mono")+
-  theme(legend.position = c(.15, .15))+
-  labs(title = "Atlanta 2010 urbanized \nboundaryby block group\n",
-       subtitle = "ACS 2015, via tidycensus",
-       caption = "taylor.hafley@uga.edu", 
-       x = NULL, y = NULL)
-
-summary(df_acs15$pov_pct)
-
-sprfldj %>% 
-  ggplot()+
-  geom_sf(aes(fill = urb40))+
-  scale_fill_viridis_d("urban classification")+
-  coord_sf(datum = NA)+
-  theme_void(base_family =  "mono")+
-  theme(legend.position = c(.15, .15))+
-  labs(title = "Atlanta 1940 urbanized \nboundaryby block group\n",
-       subtitle = "ACS 2015, via tidycensus",
-       caption = "taylor.hafley@uga.edu", 
-       x = NULL, y = NULL)
-
-# tmap
-
-tm_shape(df_acs15) +
-  tm_polygons("pov_pct")
-
-tm_shape(df_acs15) +
-  tm_polygons("b17001_002e")
-
-tmap_mode("view")
-
-tm_shape(df_acs15) +
-  tm_polygons(c("pov_pct", "b17001_002e"), 
-              style=c("pretty", "pretty"),
-              palette=list("RdYlGn", "Purples"),
-              auto.palette.mapping=FALSE,
-              title=c("Percent", "Total")) +
-  tm_style_grey()
-
-#tmap_mode("plot")
-
-tm_shape(df_acs15) +
-  tm_bubbles(size=c("pov_pct", "b17001_002e"), title.size="Homeownership") +
-  tm_facets(free.scales=FALSE) +
-  tm_layout(panel.labels=c("1940", "2010"))
-
-tm_shape(df_acs15) +
-  tm_bubbles(size=c("pov_pct"), title.size="Percent Poverty") +
-  tm_facets(free.scales=FALSE) +
-  tm_layout(panel.labels=c("1940"))
-
-
-
-
-
-# tmap
-
-tm_shape(sprfldj) +
-  tm_polygons("hopct15")
-
-tm_shape(sprfldj) +
-  tm_polygons("adj10a")
-
-tmap_mode("view")
-
-tm_shape(df_acs15) +
-  tm_polygons(c("pov_pct", "b17001_002e"), 
-              style=c("pretty", "pretty"),
-              palette=list("RdYlGn", "Purples"),
-              auto.palette.mapping=FALSE,
-              title=c("Percent", "Total")) +
-  tm_style_grey()
-
-#tmap_mode("plot")
-
-tm_shape(df_acs15) +
-  tm_bubbles(size=c("pov_pct", "b17001_002e"), title.size="Homeownership") +
-  tm_facets(free.scales=FALSE) +
-  tm_layout(panel.labels=c("1940", "2010"))
-
-tm_shape(df_acs15) +
-  tm_bubbles(size=c("pov_pct"), title.size="Percent Poverty") +
-  tm_facets(free.scales=FALSE) +
-  tm_layout(panel.labels=c("1940"))
-
-
-
-
-
-
-# these don't work for now (1/19/18)
-# stupid example, but this is how you put dot density map
-
-acsjoin %>% View()
-
-tm_shape(acsjoin) +
-  tm_borders() +
-  tm_bubbles("ham10", "blue", border.col = "black", border.lwd=1, 
-             size.lim = c(0, 44000), sizes.legend = c(100, 500, 1000, 4000), 
-             title.size="Metropolitan Population") +
-  tm_layout()
-
-summary(acsjoin$ham10)
-
-tm_shape(acsjoin) +
-  tm_polygons("hopct10", title = "H.O difference") +
-  tm_facets("COUNTYJ", free.coords = FALSE) +
-  tm_style_grey()
-
-tm_shape(acsjoin) +
-  tm_polygons("hopct10", title = "H.O difference") +
-  tm_facets("COUNTYJ") +
-  tm_style_grey()
