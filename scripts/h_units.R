@@ -1,7 +1,26 @@
+# #*******************************************************************************
+# project: urban.Rproj                                                           #
+# by: Taylor Hafley                                                              #
+# last modified: 6.27.18                                                         #
+# local wd ("Google Drive/school/R/urban/data)                                   #
+# (dropbox/Projects/InProgress/urban                                             #
+# Git: ("/data/UShammerMethodBG.R)                                               #
+# data source(s): tidycensus, tigris, NHGIS, and M. Hauer                        #
+#                                                                                #
+#*********************************************************************************
 
-
-
-
+library(tidyverse)
+library(tidycensus)
+library(sf)
+library(tigris)
+options(tigris_use_cache = TRUE)
+options(tigris_class = "sf")
+library(tmap)
+library(tmaptools)
+#library(magrittr)
+library(purrr)
+library(ggplot2) # need new or development version of ggplot2
+library(readxl)
 
 #read in housing unit by year Census
 hu1940 <- read_csv("data/nhgis0022_csv/nhgis0022_ds78_1940_county.csv") %>%
