@@ -1,17 +1,28 @@
+# #*******************************************************************************
+# project: urban.Rproj                                                           #
+# by: Taylor Hafley                                                              #
+# last modified: 6.27.18                                                         #
+# local wd ("Google Drive/school/R/urban/data)                                   #
+# (dropbox/Projects/InProgress/urban                                             #
+# Git: ("/data/UShammerMethodBG.R)                                               #
+# data source(s): tidycensus, tigris, NHGIS, and M. Hauer                        #
+#                                                                                #
+# Script: calculate housing units per square mile in block groups from 1940-2010 #
+#         map Atlanta region at end of script
+#*********************************************************************************
 
 library(tidyverse)
 library(tidycensus)
+library(sf)
 library(tigris)
 options(tigris_use_cache = TRUE)
 options(tigris_class = "sf")
 library(tmap)
 library(tmaptools)
-library(sf)
-library(magrittr)
+#library(magrittr)
 library(purrr)
 library(ggplot2)
 library(readxl)
-
 
 # read in county-level number of housing units, 1940-2010
 # calculated in h_units.R
@@ -106,36 +117,7 @@ US_bg2 <- US_bg2 %>%
 
 
 
-######################################################################
-# visualizations
-#******************
-
-#labels <- c(G1300670 = 'Cobb', G1301210 = 'Fulton', G1300890 = 'DeKalb',
-#            G1301350 = 'Gwinnett', G1302190 = 'Oconee', G1300590 = 'Clarke')
-
-US_bg2 %>% 
-  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
-                                       'G1300590') & hu90_sqmi >10 & hu90_sqmi < 800) %>%
-  ggplot((mapping = aes(x = hu90_sqmi)))+
-  geom_histogram(bins = 10) +
-  labs(title = "1990 Housing Units", x = "hu/sq mi") +
-  facet_wrap('COUNTYJ', labeller = labeller(COUNTYJ = labels))
-
-
-US_bg2 %>% 
-  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
-                                       'G1300590')) %>%
-  ggplot(mapping = aes(x=COUNTYJ, y = hu40_sqmi)) +
-  geom_boxplot()
-
-# write_csv(test1c,"Dropbox/hafley/urbanization/test1c.csv") #If you want to save as a file
-
-
-
-
-
-
-# skip for now, commented out
+#optional: categorize block group as 'urban' if housing units/sq. mil > 200
 US_bg2$urb40 <- ''
 US_bg2[,'urb40'] <- sapply(US_bg2[,'hu40_sqmi'],function(x)ifelse(x > 200,1,0))
 US_bg2$urb40 <- as.factor(US_bg2$urb40)
@@ -169,3 +151,231 @@ US_bg2$urb80 <- as.factor(US_bg2$urb80)
 US_bg2$urb90 <- as.factor(US_bg2$urb90)
 US_bg2$urb00 <- as.factor(US_bg2$urb00)
 US_bg2$urb10 <- as.factor(US_bg2$urb10)
+
+
+
+
+
+
+######################################################################
+# visualizations
+#******************
+
+#labels <- c(G1300670 = 'Cobb', G1301210 = 'Fulton', G1300890 = 'DeKalb',
+#            G1301350 = 'Gwinnett', G1302190 = 'Oconee', G1300590 = 'Clarke')
+
+US_bg2 %>% 
+  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
+                                       'G1300590') & hu90_sqmi >10 & hu90_sqmi < 800) %>%
+  ggplot((mapping = aes(x = hu90_sqmi)))+
+  geom_histogram(bins = 10) +
+  labs(title = "1990 Housing Units", x = "hu/sq mi") +
+  facet_wrap('COUNTYJ', labeller = labeller(COUNTYJ = labels))
+
+
+US_bg2 %>% 
+  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
+                                       'G1300590')) %>%
+  ggplot(mapping = aes(x=COUNTYJ, y = hu40_sqmi)) +
+  geom_boxplot()
+
+# write_csv(test1c,"Dropbox/hafley/urbanization/test1c.csv") #If you want to save as a file
+
+
+
+# use tigris package to pull in spatial files; to join and map US_bg2
+
+gaBGs <- block_groups("GA", cb = TRUE)
+
+ggplot(gaBGs) +
+  geom_sf()
+
+cb <- core_based_statistical_areas(cb = TRUE)
+atl <- filter(cb, grepl("Atlanta", NAME))
+
+ggplot(atl) + 
+  geom_sf()
+
+w1 <- st_within(gaBGs, atl)
+
+print(length(w1))
+print(w1[1:5])
+
+w2 <- map_lgl(w1, function(x) {
+  if (length(x) == 1) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+})
+
+p2 <- gaBGs[w2,]
+
+ggplot() + 
+  geom_sf(data = p2) + 
+  geom_sf(data = atl, fill = NA, color = "red")
+
+atl_hammer <- left_join(x = p2, y = US_bg2, by = c('GEOID' = 'geoid'))
+
+
+# the following scripts create the maps located in the 'maps' folder.
+
+leg_col <- c("#E1EFFA","#065AA0")
+lbl <- c("< 200 units/sq mi", "> 200 units/sq mi")
+
+rd <- primary_roads()
+
+atl40 <- tm_shape(atl_hammer) + 
+  tm_fill('hu40_sqmi', breaks = c(0, 200, 20000), 
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE,
+          title = '1940') +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1940") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl40
+  
+atl50 <- tm_shape(atl_hammer) + 
+  tm_fill('hu50_sqmi', breaks = c(0, 200, 20000), 
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1950") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl60 <- tm_shape(atl_hammer) + 
+  tm_fill('hu60_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1960") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl70 <- tm_shape(atl_hammer) + 
+  tm_fill('hu70_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1970") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl80 <- tm_shape(atl_hammer) + 
+  tm_fill('hu80_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1980") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+  
+atl90 <- tm_shape(atl_hammer) + 
+  tm_fill('hu90_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1990") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl00 <- tm_shape(atl_hammer) + 
+  tm_fill('hu00_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "2000") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl10 <- tm_shape(atl_hammer) + 
+  tm_fill('hu10_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "2010") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+
+library(magick)
+list.files(path = "maps/.", pattern = "*.png", full.names = T) %>%
+  map(image_read) %>% # reads each path file
+  image_join() %>% # joins image
+  image_animate(fps=2) %>% # animates, can opt for number of loops
+  image_write("maps/atl.gif") # write to current dir

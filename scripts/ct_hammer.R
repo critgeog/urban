@@ -97,7 +97,40 @@ US_ct2 <- US_ct2 %>%
 
 # write_csv(US_bg2, "csv/blk_grp_complete.csv")
 
+# skip for now, commented out
+US_ct2$urb40 <- ''
+US_ct2[,'urb40'] <- sapply(US_ct2[,'hu40_sqmi'],function(x)ifelse(x > 200,1,0))
+US_ct2$urb40 <- as.factor(US_ct2$urb40)
 
+# set up urban classification
+US_ct2$urb50 <- ''
+US_ct2$urb60 <- ''
+US_ct2$urb70 <- ''
+US_ct2$urb80 <- ''
+US_ct2$urb90 <- ''
+US_ct2$urb00 <- ''
+US_ct2$urb10 <- ''
+
+# determine if area is urban. If huXX_sqmi > 200 or if previous decade is
+# classified as urban, then ct is urban, according to this approach
+US_ct2[,'urb50'] <- ifelse((US_ct2$hu50_sqmi > 200 | US_ct2$urb40 == 1),1,0)
+US_ct2[,'urb60'] <- ifelse((US_ct2$hu60_sqmi > 200 | US_ct2$urb50 == 1),1,0)
+US_ct2[,'urb70'] <- ifelse((US_ct2$hu70_sqmi > 200 | US_ct2$urb40 == 1),1,0)
+US_ct2[,'urb80'] <- ifelse((US_ct2$hu80_sqmi > 200 | US_ct2$urb70 == 1),1,0)
+US_ct2[,'urb90'] <- ifelse((US_ct2$hu90_sqmi > 200 | US_ct2$urb80 == 1),1,0)
+US_ct2[,'urb00'] <- ifelse((US_ct2$hu00_sqmi > 200 | US_ct2$urb90 == 1),1,0)
+US_ct2[,'urb10'] <- ifelse((US_ct2$hu10_sqmi > 200 | US_ct2$urb00 == 1),1,0)
+
+
+# convert to factors
+US_ct2$urb40 <- as.factor(US_ct2$urb40)
+US_ct2$urb50 <- as.factor(US_ct2$urb50)
+US_ct2$urb60 <- as.factor(US_ct2$urb60)
+US_ct2$urb70 <- as.factor(US_ct2$urb70)
+US_ct2$urb80 <- as.factor(US_ct2$urb80)
+US_ct2$urb90 <- as.factor(US_ct2$urb90)
+US_ct2$urb00 <- as.factor(US_ct2$urb00)
+US_ct2$urb10 <- as.factor(US_ct2$urb10)
 
 
 
@@ -107,65 +140,194 @@ US_ct2 <- US_ct2 %>%
 
 
 ######################################################################
-# visualizations
+# maps
 #******************
 
-#labels <- c(G1300670 = 'Cobb', G1301210 = 'Fulton', G1300890 = 'DeKalb',
-#            G1301350 = 'Gwinnett', G1302190 = 'Oconee', G1300590 = 'Clarke')
+# use tigris package to pull in spatial files; to join and map US_bg2
 
-US_bg2 %>% 
-  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
-                                       'G1300590') & hu90_sqmi >10 & hu90_sqmi < 800) %>%
-  ggplot((mapping = aes(x = hu90_sqmi)))+
-  geom_histogram(bins = 10) +
-  labs(title = "1990 Housing Units", x = "hu/sq mi") +
-  facet_wrap('COUNTYJ', labeller = labeller(COUNTYJ = labels))
+gaCTs <- tracts("GA", cb = TRUE)
 
+ggplot(gaCTs) +
+  geom_sf()
 
-US_bg2 %>% 
-  filter(STATEA == 13 & COUNTYJ %in% c('G1300670','G1301210','G1300890','G1301350','G1302190',
-                                       'G1300590')) %>%
-  ggplot(mapping = aes(x=COUNTYJ, y = hu40_sqmi)) +
-  geom_boxplot()
+cb <- core_based_statistical_areas(cb = TRUE)
+atl <- filter(cb, grepl("Atlanta", NAME))
 
-# write_csv(test1c,"Dropbox/hafley/urbanization/test1c.csv") #If you want to save as a file
+ggplot(atl) + 
+  geom_sf()
 
+w1 <- st_within(gaCTs, atl)
 
+print(length(w1))
+print(w1[1:5])
 
+w2 <- map_lgl(w1, function(x) {
+  if (length(x) == 1) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+})
 
+p2 <- gaCTs[w2,]
 
+ggplot() + 
+  geom_sf(data = p2) + 
+  geom_sf(data = atl, fill = NA, color = "red")
 
-# skip for now, commented out
-US_bg2$urb40 <- ''
-US_bg2[,'urb40'] <- sapply(US_bg2[,'hu40_sqmi'],function(x)ifelse(x > 200,1,0))
-US_bg2$urb40 <- as.factor(US_bg2$urb40)
-
-# set up urban classification
-US_bg2$urb50 <- ''
-US_bg2$urb60 <- ''
-US_bg2$urb70 <- ''
-US_bg2$urb80 <- ''
-US_bg2$urb90 <- ''
-US_bg2$urb00 <- ''
-US_bg2$urb10 <- ''
-
-# determine if area is urban. If huXX_sqmi > 200 or if previous decade is
-# classified as urban, then bg is urban, according to this approach
-US_bg2[,'urb50'] <- ifelse((US_bg2$hu50_sqmi > 200 | US_bg2$urb40 == 1),1,0)
-US_bg2[,'urb60'] <- ifelse((US_bg2$hu60_sqmi > 200 | US_bg2$urb50 == 1),1,0)
-US_bg2[,'urb70'] <- ifelse((US_bg2$hu70_sqmi > 200 | US_bg2$urb40 == 1),1,0)
-US_bg2[,'urb80'] <- ifelse((US_bg2$hu80_sqmi > 200 | US_bg2$urb70 == 1),1,0)
-US_bg2[,'urb90'] <- ifelse((US_bg2$hu90_sqmi > 200 | US_bg2$urb80 == 1),1,0)
-US_bg2[,'urb00'] <- ifelse((US_bg2$hu00_sqmi > 200 | US_bg2$urb90 == 1),1,0)
-US_bg2[,'urb10'] <- ifelse((US_bg2$hu10_sqmi > 200 | US_bg2$urb00 == 1),1,0)
+atl_hammer <- left_join(x = p2, y = US_ct2, by = c('GEOID' = 'geoid'))
 
 
-# convert to factors
-US_bg2$urb40 <- as.factor(US_bg2$urb40)
-US_bg2$urb50 <- as.factor(US_bg2$urb50)
-US_bg2$urb60 <- as.factor(US_bg2$urb60)
-US_bg2$urb70 <- as.factor(US_bg2$urb70)
-US_bg2$urb80 <- as.factor(US_bg2$urb80)
-US_bg2$urb90 <- as.factor(US_bg2$urb90)
-US_bg2$urb00 <- as.factor(US_bg2$urb00)
-US_bg2$urb10 <- as.factor(US_bg2$urb10)
+# the following scripts create the maps located in the 'maps' folder.
+
+leg_col <- c("#E1EFFA","#065AA0")
+lbl <- c("< 200 units/sq mi", "> 200 units/sq mi")
+
+rd <- primary_roads()
+
+atl40 <- tm_shape(atl_hammer) + 
+  tm_fill('hu40_sqmi', breaks = c(0, 200, 20000), 
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE,
+          title = '1940') +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1940") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl40
+
+atl50 <- tm_shape(atl_hammer) + 
+  tm_fill('hu50_sqmi', breaks = c(0, 200, 20000), 
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1950") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl60 <- tm_shape(atl_hammer) + 
+  tm_fill('hu60_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1960") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl70 <- tm_shape(atl_hammer) + 
+  tm_fill('hu70_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1970") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl80 <- tm_shape(atl_hammer) + 
+  tm_fill('hu80_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1980") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl90 <- tm_shape(atl_hammer) + 
+  tm_fill('hu90_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "1990") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl00 <- tm_shape(atl_hammer) + 
+  tm_fill('hu00_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "2000") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
+
+atl10 <- tm_shape(atl_hammer) + 
+  tm_fill('hu10_sqmi', breaks = c(0, 200, 20000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          legend.show = FALSE) +
+  tm_add_legend(type = c("fill"), labels = lbl, col = leg_col, 
+                title = "2010") +
+  tm_shape(rd) +
+  tm_lines(col = 'black', alpha = 0.6) +
+  tm_compass(type = "arrow", size = 4, position = c(0.82, 0.08)) +
+  tm_legend(position = c(0.025, 0.05),
+            bg.color = "white",
+            frame = TRUE,
+            legend.text.size = .7,
+            legend.title.size = 1.3) + 
+  tm_layout(frame = FALSE, 
+            outer.margins=c(0,0,0,0), 
+            inner.margins=c(0,0,0,0), asp=0)
