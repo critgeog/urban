@@ -1,0 +1,1991 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.2.0-Bonn" projectname="">
+  <homePath path=""/>
+  <title></title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
+  <trust active="0"/>
+  <projectCrs>
+    <spatialrefsys>
+      <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+      <srsid>3452</srsid>
+      <srid>4326</srid>
+      <authid>EPSG:4326</authid>
+      <description>WGS 84</description>
+      <projectionacronym>longlat</projectionacronym>
+      <ellipsoidacronym>WGS84</ellipsoidacronym>
+      <geographicflag>true</geographicflag>
+    </spatialrefsys>
+  </projectCrs>
+  <layer-tree-group>
+    <customproperties/>
+    <layer-tree-layer checked="Qt::Checked" source="../../data/atl2.geojson" providerKey="ogr" name="atl2 OGRGeoJSON MultiPolygon" expanded="1" id="atl220180627200017565">
+      <customproperties/>
+    </layer-tree-layer>
+    <custom-order enabled="0">
+      <item>atl220180627200017565</item>
+    </custom-order>
+  </layer-tree-group>
+  <snapping-settings type="1" intersection-snapping="0" enabled="0" mode="1" tolerance="0" unit="2">
+    <individual-layer-settings>
+      <layer-setting type="2" units="2" enabled="0" id="atl220180627200017565" tolerance="0"/>
+    </individual-layer-settings>
+  </snapping-settings>
+  <relations/>
+  <mapcanvas annotationsVisible="1" name="theMapCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>-130028.65347024539369158</xmin>
+      <ymin>1084903.67946821660734713</ymin>
+      <xmax>74393.86870023209485225</xmax>
+      <ymax>1292720.99117275583557785</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <legend updateDrawingOrder="true">
+    <legendlayer checked="Qt::Checked" drawingOrder="-1" open="true" name="atl2 OGRGeoJSON MultiPolygon" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" layerid="atl220180627200017565" isInOverview="0"/>
+      </filegroup>
+    </legendlayer>
+  </legend>
+  <mapViewDocks/>
+  <mapViewDocks3D/>
+  <projectlayers>
+    <maplayer refreshOnNotifyEnabled="0" minScale="1e+8" simplifyDrawingHints="1" simplifyMaxScale="1" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" type="vector" simplifyDrawingTol="1" refreshOnNotifyMessage="" labelsEnabled="1" simplifyLocal="1" readOnly="0" simplifyAlgorithm="0" maxScale="0" autoRefreshTime="0" geometry="Polygon">
+      <extent>
+        <xmin>-127286.81900842281174846</xmin>
+        <ymin>1086157.78876641183160245</ymin>
+        <xmax>67401.29734441288746893</xmax>
+        <ymax>1284079.03800883004441857</ymax>
+      </extent>
+      <id>atl220180627200017565</id>
+      <datasource>../../data/atl2.geojson</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>atl2 OGRGeoJSON MultiPolygon</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <renderer-v2 forceraster="0" type="categorizedSymbol" symbollevels="0" attr="urb40" enableorderby="0">
+        <categories>
+          <category symbol="0" render="true" value="0" label="0"/>
+          <category symbol="1" render="true" value="1" label="1"/>
+          <category symbol="2" render="true" value="" label=""/>
+        </categories>
+        <symbols>
+          <symbol type="fill" alpha="1" clip_to_extent="1" name="0">
+            <layer class="SimpleFill" enabled="1" locked="0" pass="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="178,215,244,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="178,215,244,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" value="" name="name"/>
+                  <Option name="properties"/>
+                  <Option type="QString" value="collection" name="type"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" alpha="1" clip_to_extent="1" name="1">
+            <layer class="SimpleFill" enabled="1" locked="0" pass="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="6,90,160,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="6,90,160,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" value="" name="name"/>
+                  <Option name="properties"/>
+                  <Option type="QString" value="collection" name="type"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" alpha="1" clip_to_extent="1" name="2">
+            <layer class="SimpleFill" enabled="1" locked="0" pass="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="82,198,208,0" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" value="" name="name"/>
+                  <Option name="properties"/>
+                  <Option type="QString" value="collection" name="type"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <source-symbol>
+          <symbol type="fill" alpha="1" clip_to_extent="1" name="0">
+            <layer class="SimpleFill" enabled="1" locked="0" pass="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="132,51,81,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" value="" name="name"/>
+                  <Option name="properties"/>
+                  <Option type="QString" value="collection" name="type"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </source-symbol>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory enabled="0" scaleBasedVisibility="0" sizeScale="3x:0,0,0,0,0,0" penWidth="0" barWidth="5" minimumSize="0" rotationOffset="270" height="15" scaleDependency="Area" backgroundColor="#ffffff" sizeType="MM" labelPlacementMethod="XHeight" opacity="1" lineSizeType="MM" penColor="#000000" backgroundAlpha="255" width="15" minScaleDenominator="inf" lineSizeScale="3x:0,0,0,0,0,0" maxScaleDenominator="1e+8" diagramOrientation="Up" penAlpha="255">
+          <fontProperties style="" description=".SF NS Text,13,-1,5,50,0,0,0,0,0"/>
+          <attribute field="" color="#000000" label=""/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings linePlacementFlags="10" zIndex="0" dist="0" placement="0" obstacle="0" priority="0" showAll="1">
+        <properties>
+          <Option type="Map">
+            <Option type="QString" value="" name="name"/>
+            <Option name="properties"/>
+            <Option type="QString" value="collection" name="type"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <fieldConfiguration>
+        <field name="STATEFP.x">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP.x">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE.x">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE.x">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="AFFGEOID">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="NAME">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="LSAD">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ALAND.x">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="AWATER.x">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GISJOIN">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="YEAR">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="STATE">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="STATEA">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTY">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYA">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTA">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPA">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE001">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE002">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE003">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE004">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE005">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE006">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE007">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE008">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE009">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE010">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSE011">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="NAME_M">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM001">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM002">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM003">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM004">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM005">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM006">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM007">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM008">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM009">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM010">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ADQSM011">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYJ">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FID">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="STATEFP.y">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP.y">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE.y">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE.y">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ALAND.y">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="AWATER.y">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLAT">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLON">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Shape_Leng">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Shape_Area">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="area">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu40">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu50">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu60">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu70">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu80">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu90">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu00">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu10">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="j50">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="j60">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="j70">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="j80">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="j90">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="j00">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="j10">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="i50">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="i60">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="i70">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="i80">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="i90">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="i00">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="i10">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj40">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj50">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj60">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj70">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj80">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj90">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj00">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="adj10">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu40_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu50_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu60_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu70_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu80_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu90_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu00_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hu10_sqmi">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb40">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb50">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb60">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb70">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb80">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb90">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb00">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="urb10">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option type="QString" value="0" name="IsMultiline"/>
+                <Option type="QString" value="0" name="UseHtml"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="STATEFP.x" index="0" name=""/>
+        <alias field="COUNTYFP.x" index="1" name=""/>
+        <alias field="TRACTCE.x" index="2" name=""/>
+        <alias field="BLKGRPCE.x" index="3" name=""/>
+        <alias field="AFFGEOID" index="4" name=""/>
+        <alias field="GEOID" index="5" name=""/>
+        <alias field="NAME" index="6" name=""/>
+        <alias field="LSAD" index="7" name=""/>
+        <alias field="ALAND.x" index="8" name=""/>
+        <alias field="AWATER.x" index="9" name=""/>
+        <alias field="GISJOIN" index="10" name=""/>
+        <alias field="YEAR" index="11" name=""/>
+        <alias field="STATE" index="12" name=""/>
+        <alias field="STATEA" index="13" name=""/>
+        <alias field="COUNTY" index="14" name=""/>
+        <alias field="COUNTYA" index="15" name=""/>
+        <alias field="TRACTA" index="16" name=""/>
+        <alias field="BLKGRPA" index="17" name=""/>
+        <alias field="ADQSE001" index="18" name=""/>
+        <alias field="ADQSE002" index="19" name=""/>
+        <alias field="ADQSE003" index="20" name=""/>
+        <alias field="ADQSE004" index="21" name=""/>
+        <alias field="ADQSE005" index="22" name=""/>
+        <alias field="ADQSE006" index="23" name=""/>
+        <alias field="ADQSE007" index="24" name=""/>
+        <alias field="ADQSE008" index="25" name=""/>
+        <alias field="ADQSE009" index="26" name=""/>
+        <alias field="ADQSE010" index="27" name=""/>
+        <alias field="ADQSE011" index="28" name=""/>
+        <alias field="NAME_M" index="29" name=""/>
+        <alias field="ADQSM001" index="30" name=""/>
+        <alias field="ADQSM002" index="31" name=""/>
+        <alias field="ADQSM003" index="32" name=""/>
+        <alias field="ADQSM004" index="33" name=""/>
+        <alias field="ADQSM005" index="34" name=""/>
+        <alias field="ADQSM006" index="35" name=""/>
+        <alias field="ADQSM007" index="36" name=""/>
+        <alias field="ADQSM008" index="37" name=""/>
+        <alias field="ADQSM009" index="38" name=""/>
+        <alias field="ADQSM010" index="39" name=""/>
+        <alias field="ADQSM011" index="40" name=""/>
+        <alias field="COUNTYJ" index="41" name=""/>
+        <alias field="FID" index="42" name=""/>
+        <alias field="STATEFP.y" index="43" name=""/>
+        <alias field="COUNTYFP.y" index="44" name=""/>
+        <alias field="TRACTCE.y" index="45" name=""/>
+        <alias field="BLKGRPCE.y" index="46" name=""/>
+        <alias field="ALAND.y" index="47" name=""/>
+        <alias field="AWATER.y" index="48" name=""/>
+        <alias field="INTPTLAT" index="49" name=""/>
+        <alias field="INTPTLON" index="50" name=""/>
+        <alias field="Shape_Leng" index="51" name=""/>
+        <alias field="Shape_Area" index="52" name=""/>
+        <alias field="area" index="53" name=""/>
+        <alias field="hu40" index="54" name=""/>
+        <alias field="hu50" index="55" name=""/>
+        <alias field="hu60" index="56" name=""/>
+        <alias field="hu70" index="57" name=""/>
+        <alias field="hu80" index="58" name=""/>
+        <alias field="hu90" index="59" name=""/>
+        <alias field="hu00" index="60" name=""/>
+        <alias field="hu10" index="61" name=""/>
+        <alias field="j50" index="62" name=""/>
+        <alias field="j60" index="63" name=""/>
+        <alias field="j70" index="64" name=""/>
+        <alias field="j80" index="65" name=""/>
+        <alias field="j90" index="66" name=""/>
+        <alias field="j00" index="67" name=""/>
+        <alias field="j10" index="68" name=""/>
+        <alias field="i50" index="69" name=""/>
+        <alias field="i60" index="70" name=""/>
+        <alias field="i70" index="71" name=""/>
+        <alias field="i80" index="72" name=""/>
+        <alias field="i90" index="73" name=""/>
+        <alias field="i00" index="74" name=""/>
+        <alias field="i10" index="75" name=""/>
+        <alias field="adj40" index="76" name=""/>
+        <alias field="adj50" index="77" name=""/>
+        <alias field="adj60" index="78" name=""/>
+        <alias field="adj70" index="79" name=""/>
+        <alias field="adj80" index="80" name=""/>
+        <alias field="adj90" index="81" name=""/>
+        <alias field="adj00" index="82" name=""/>
+        <alias field="adj10" index="83" name=""/>
+        <alias field="hu40_sqmi" index="84" name=""/>
+        <alias field="hu50_sqmi" index="85" name=""/>
+        <alias field="hu60_sqmi" index="86" name=""/>
+        <alias field="hu70_sqmi" index="87" name=""/>
+        <alias field="hu80_sqmi" index="88" name=""/>
+        <alias field="hu90_sqmi" index="89" name=""/>
+        <alias field="hu00_sqmi" index="90" name=""/>
+        <alias field="hu10_sqmi" index="91" name=""/>
+        <alias field="urb40" index="92" name=""/>
+        <alias field="urb50" index="93" name=""/>
+        <alias field="urb60" index="94" name=""/>
+        <alias field="urb70" index="95" name=""/>
+        <alias field="urb80" index="96" name=""/>
+        <alias field="urb90" index="97" name=""/>
+        <alias field="urb00" index="98" name=""/>
+        <alias field="urb10" index="99" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" field="STATEFP.x" expression=""/>
+        <default applyOnUpdate="0" field="COUNTYFP.x" expression=""/>
+        <default applyOnUpdate="0" field="TRACTCE.x" expression=""/>
+        <default applyOnUpdate="0" field="BLKGRPCE.x" expression=""/>
+        <default applyOnUpdate="0" field="AFFGEOID" expression=""/>
+        <default applyOnUpdate="0" field="GEOID" expression=""/>
+        <default applyOnUpdate="0" field="NAME" expression=""/>
+        <default applyOnUpdate="0" field="LSAD" expression=""/>
+        <default applyOnUpdate="0" field="ALAND.x" expression=""/>
+        <default applyOnUpdate="0" field="AWATER.x" expression=""/>
+        <default applyOnUpdate="0" field="GISJOIN" expression=""/>
+        <default applyOnUpdate="0" field="YEAR" expression=""/>
+        <default applyOnUpdate="0" field="STATE" expression=""/>
+        <default applyOnUpdate="0" field="STATEA" expression=""/>
+        <default applyOnUpdate="0" field="COUNTY" expression=""/>
+        <default applyOnUpdate="0" field="COUNTYA" expression=""/>
+        <default applyOnUpdate="0" field="TRACTA" expression=""/>
+        <default applyOnUpdate="0" field="BLKGRPA" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE001" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE002" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE003" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE004" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE005" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE006" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE007" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE008" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE009" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE010" expression=""/>
+        <default applyOnUpdate="0" field="ADQSE011" expression=""/>
+        <default applyOnUpdate="0" field="NAME_M" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM001" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM002" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM003" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM004" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM005" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM006" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM007" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM008" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM009" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM010" expression=""/>
+        <default applyOnUpdate="0" field="ADQSM011" expression=""/>
+        <default applyOnUpdate="0" field="COUNTYJ" expression=""/>
+        <default applyOnUpdate="0" field="FID" expression=""/>
+        <default applyOnUpdate="0" field="STATEFP.y" expression=""/>
+        <default applyOnUpdate="0" field="COUNTYFP.y" expression=""/>
+        <default applyOnUpdate="0" field="TRACTCE.y" expression=""/>
+        <default applyOnUpdate="0" field="BLKGRPCE.y" expression=""/>
+        <default applyOnUpdate="0" field="ALAND.y" expression=""/>
+        <default applyOnUpdate="0" field="AWATER.y" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLAT" expression=""/>
+        <default applyOnUpdate="0" field="INTPTLON" expression=""/>
+        <default applyOnUpdate="0" field="Shape_Leng" expression=""/>
+        <default applyOnUpdate="0" field="Shape_Area" expression=""/>
+        <default applyOnUpdate="0" field="area" expression=""/>
+        <default applyOnUpdate="0" field="hu40" expression=""/>
+        <default applyOnUpdate="0" field="hu50" expression=""/>
+        <default applyOnUpdate="0" field="hu60" expression=""/>
+        <default applyOnUpdate="0" field="hu70" expression=""/>
+        <default applyOnUpdate="0" field="hu80" expression=""/>
+        <default applyOnUpdate="0" field="hu90" expression=""/>
+        <default applyOnUpdate="0" field="hu00" expression=""/>
+        <default applyOnUpdate="0" field="hu10" expression=""/>
+        <default applyOnUpdate="0" field="j50" expression=""/>
+        <default applyOnUpdate="0" field="j60" expression=""/>
+        <default applyOnUpdate="0" field="j70" expression=""/>
+        <default applyOnUpdate="0" field="j80" expression=""/>
+        <default applyOnUpdate="0" field="j90" expression=""/>
+        <default applyOnUpdate="0" field="j00" expression=""/>
+        <default applyOnUpdate="0" field="j10" expression=""/>
+        <default applyOnUpdate="0" field="i50" expression=""/>
+        <default applyOnUpdate="0" field="i60" expression=""/>
+        <default applyOnUpdate="0" field="i70" expression=""/>
+        <default applyOnUpdate="0" field="i80" expression=""/>
+        <default applyOnUpdate="0" field="i90" expression=""/>
+        <default applyOnUpdate="0" field="i00" expression=""/>
+        <default applyOnUpdate="0" field="i10" expression=""/>
+        <default applyOnUpdate="0" field="adj40" expression=""/>
+        <default applyOnUpdate="0" field="adj50" expression=""/>
+        <default applyOnUpdate="0" field="adj60" expression=""/>
+        <default applyOnUpdate="0" field="adj70" expression=""/>
+        <default applyOnUpdate="0" field="adj80" expression=""/>
+        <default applyOnUpdate="0" field="adj90" expression=""/>
+        <default applyOnUpdate="0" field="adj00" expression=""/>
+        <default applyOnUpdate="0" field="adj10" expression=""/>
+        <default applyOnUpdate="0" field="hu40_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="hu50_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="hu60_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="hu70_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="hu80_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="hu90_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="hu00_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="hu10_sqmi" expression=""/>
+        <default applyOnUpdate="0" field="urb40" expression=""/>
+        <default applyOnUpdate="0" field="urb50" expression=""/>
+        <default applyOnUpdate="0" field="urb60" expression=""/>
+        <default applyOnUpdate="0" field="urb70" expression=""/>
+        <default applyOnUpdate="0" field="urb80" expression=""/>
+        <default applyOnUpdate="0" field="urb90" expression=""/>
+        <default applyOnUpdate="0" field="urb00" expression=""/>
+        <default applyOnUpdate="0" field="urb10" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="0" field="STATEFP.x" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="COUNTYFP.x" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="TRACTCE.x" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="BLKGRPCE.x" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="AFFGEOID" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="GEOID" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="NAME" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="LSAD" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ALAND.x" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="AWATER.x" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="GISJOIN" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="YEAR" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="STATE" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="STATEA" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="COUNTY" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="COUNTYA" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="TRACTA" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="BLKGRPA" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE001" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE002" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE003" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE004" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE005" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE006" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE007" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE008" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE009" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE010" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSE011" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="NAME_M" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM001" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM002" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM003" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM004" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM005" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM006" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM007" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM008" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM009" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM010" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ADQSM011" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="COUNTYJ" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="FID" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="STATEFP.y" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="COUNTYFP.y" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="TRACTCE.y" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="BLKGRPCE.y" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="ALAND.y" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="AWATER.y" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="INTPTLAT" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="INTPTLON" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="Shape_Leng" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="Shape_Area" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="area" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu40" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu50" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu60" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu70" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu80" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu90" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu00" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu10" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="j50" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="j60" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="j70" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="j80" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="j90" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="j00" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="j10" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="i50" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="i60" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="i70" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="i80" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="i90" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="i00" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="i10" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj40" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj50" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj60" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj70" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj80" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj90" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj00" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="adj10" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu40_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu50_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu60_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu70_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu80_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu90_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu00_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="hu10_sqmi" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb40" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb50" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb60" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb70" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb80" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb90" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb00" unique_strength="0" exp_strength="0" constraints="0"/>
+        <constraint notnull_strength="0" field="urb10" unique_strength="0" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="STATEFP.x" desc="" exp=""/>
+        <constraint field="COUNTYFP.x" desc="" exp=""/>
+        <constraint field="TRACTCE.x" desc="" exp=""/>
+        <constraint field="BLKGRPCE.x" desc="" exp=""/>
+        <constraint field="AFFGEOID" desc="" exp=""/>
+        <constraint field="GEOID" desc="" exp=""/>
+        <constraint field="NAME" desc="" exp=""/>
+        <constraint field="LSAD" desc="" exp=""/>
+        <constraint field="ALAND.x" desc="" exp=""/>
+        <constraint field="AWATER.x" desc="" exp=""/>
+        <constraint field="GISJOIN" desc="" exp=""/>
+        <constraint field="YEAR" desc="" exp=""/>
+        <constraint field="STATE" desc="" exp=""/>
+        <constraint field="STATEA" desc="" exp=""/>
+        <constraint field="COUNTY" desc="" exp=""/>
+        <constraint field="COUNTYA" desc="" exp=""/>
+        <constraint field="TRACTA" desc="" exp=""/>
+        <constraint field="BLKGRPA" desc="" exp=""/>
+        <constraint field="ADQSE001" desc="" exp=""/>
+        <constraint field="ADQSE002" desc="" exp=""/>
+        <constraint field="ADQSE003" desc="" exp=""/>
+        <constraint field="ADQSE004" desc="" exp=""/>
+        <constraint field="ADQSE005" desc="" exp=""/>
+        <constraint field="ADQSE006" desc="" exp=""/>
+        <constraint field="ADQSE007" desc="" exp=""/>
+        <constraint field="ADQSE008" desc="" exp=""/>
+        <constraint field="ADQSE009" desc="" exp=""/>
+        <constraint field="ADQSE010" desc="" exp=""/>
+        <constraint field="ADQSE011" desc="" exp=""/>
+        <constraint field="NAME_M" desc="" exp=""/>
+        <constraint field="ADQSM001" desc="" exp=""/>
+        <constraint field="ADQSM002" desc="" exp=""/>
+        <constraint field="ADQSM003" desc="" exp=""/>
+        <constraint field="ADQSM004" desc="" exp=""/>
+        <constraint field="ADQSM005" desc="" exp=""/>
+        <constraint field="ADQSM006" desc="" exp=""/>
+        <constraint field="ADQSM007" desc="" exp=""/>
+        <constraint field="ADQSM008" desc="" exp=""/>
+        <constraint field="ADQSM009" desc="" exp=""/>
+        <constraint field="ADQSM010" desc="" exp=""/>
+        <constraint field="ADQSM011" desc="" exp=""/>
+        <constraint field="COUNTYJ" desc="" exp=""/>
+        <constraint field="FID" desc="" exp=""/>
+        <constraint field="STATEFP.y" desc="" exp=""/>
+        <constraint field="COUNTYFP.y" desc="" exp=""/>
+        <constraint field="TRACTCE.y" desc="" exp=""/>
+        <constraint field="BLKGRPCE.y" desc="" exp=""/>
+        <constraint field="ALAND.y" desc="" exp=""/>
+        <constraint field="AWATER.y" desc="" exp=""/>
+        <constraint field="INTPTLAT" desc="" exp=""/>
+        <constraint field="INTPTLON" desc="" exp=""/>
+        <constraint field="Shape_Leng" desc="" exp=""/>
+        <constraint field="Shape_Area" desc="" exp=""/>
+        <constraint field="area" desc="" exp=""/>
+        <constraint field="hu40" desc="" exp=""/>
+        <constraint field="hu50" desc="" exp=""/>
+        <constraint field="hu60" desc="" exp=""/>
+        <constraint field="hu70" desc="" exp=""/>
+        <constraint field="hu80" desc="" exp=""/>
+        <constraint field="hu90" desc="" exp=""/>
+        <constraint field="hu00" desc="" exp=""/>
+        <constraint field="hu10" desc="" exp=""/>
+        <constraint field="j50" desc="" exp=""/>
+        <constraint field="j60" desc="" exp=""/>
+        <constraint field="j70" desc="" exp=""/>
+        <constraint field="j80" desc="" exp=""/>
+        <constraint field="j90" desc="" exp=""/>
+        <constraint field="j00" desc="" exp=""/>
+        <constraint field="j10" desc="" exp=""/>
+        <constraint field="i50" desc="" exp=""/>
+        <constraint field="i60" desc="" exp=""/>
+        <constraint field="i70" desc="" exp=""/>
+        <constraint field="i80" desc="" exp=""/>
+        <constraint field="i90" desc="" exp=""/>
+        <constraint field="i00" desc="" exp=""/>
+        <constraint field="i10" desc="" exp=""/>
+        <constraint field="adj40" desc="" exp=""/>
+        <constraint field="adj50" desc="" exp=""/>
+        <constraint field="adj60" desc="" exp=""/>
+        <constraint field="adj70" desc="" exp=""/>
+        <constraint field="adj80" desc="" exp=""/>
+        <constraint field="adj90" desc="" exp=""/>
+        <constraint field="adj00" desc="" exp=""/>
+        <constraint field="adj10" desc="" exp=""/>
+        <constraint field="hu40_sqmi" desc="" exp=""/>
+        <constraint field="hu50_sqmi" desc="" exp=""/>
+        <constraint field="hu60_sqmi" desc="" exp=""/>
+        <constraint field="hu70_sqmi" desc="" exp=""/>
+        <constraint field="hu80_sqmi" desc="" exp=""/>
+        <constraint field="hu90_sqmi" desc="" exp=""/>
+        <constraint field="hu00_sqmi" desc="" exp=""/>
+        <constraint field="hu10_sqmi" desc="" exp=""/>
+        <constraint field="urb40" desc="" exp=""/>
+        <constraint field="urb50" desc="" exp=""/>
+        <constraint field="urb60" desc="" exp=""/>
+        <constraint field="urb70" desc="" exp=""/>
+        <constraint field="urb80" desc="" exp=""/>
+        <constraint field="urb90" desc="" exp=""/>
+        <constraint field="urb00" desc="" exp=""/>
+        <constraint field="urb10" desc="" exp=""/>
+      </constraintExpressions>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+        <columns>
+          <column hidden="0" type="field" width="-1" name="STATEFP.x"/>
+          <column hidden="0" type="field" width="-1" name="COUNTYFP.x"/>
+          <column hidden="0" type="field" width="-1" name="TRACTCE.x"/>
+          <column hidden="0" type="field" width="-1" name="BLKGRPCE.x"/>
+          <column hidden="0" type="field" width="-1" name="AFFGEOID"/>
+          <column hidden="0" type="field" width="-1" name="GEOID"/>
+          <column hidden="0" type="field" width="-1" name="NAME"/>
+          <column hidden="0" type="field" width="-1" name="LSAD"/>
+          <column hidden="0" type="field" width="-1" name="ALAND.x"/>
+          <column hidden="0" type="field" width="-1" name="AWATER.x"/>
+          <column hidden="0" type="field" width="-1" name="GISJOIN"/>
+          <column hidden="0" type="field" width="-1" name="YEAR"/>
+          <column hidden="0" type="field" width="-1" name="STATE"/>
+          <column hidden="0" type="field" width="-1" name="STATEA"/>
+          <column hidden="0" type="field" width="-1" name="COUNTY"/>
+          <column hidden="0" type="field" width="-1" name="COUNTYA"/>
+          <column hidden="0" type="field" width="-1" name="TRACTA"/>
+          <column hidden="0" type="field" width="-1" name="BLKGRPA"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE001"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE002"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE003"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE004"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE005"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE006"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE007"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE008"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE009"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE010"/>
+          <column hidden="0" type="field" width="-1" name="ADQSE011"/>
+          <column hidden="0" type="field" width="-1" name="NAME_M"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM001"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM002"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM003"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM004"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM005"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM006"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM007"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM008"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM009"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM010"/>
+          <column hidden="0" type="field" width="-1" name="ADQSM011"/>
+          <column hidden="0" type="field" width="-1" name="COUNTYJ"/>
+          <column hidden="0" type="field" width="-1" name="FID"/>
+          <column hidden="0" type="field" width="-1" name="STATEFP.y"/>
+          <column hidden="0" type="field" width="-1" name="COUNTYFP.y"/>
+          <column hidden="0" type="field" width="-1" name="TRACTCE.y"/>
+          <column hidden="0" type="field" width="-1" name="BLKGRPCE.y"/>
+          <column hidden="0" type="field" width="-1" name="ALAND.y"/>
+          <column hidden="0" type="field" width="-1" name="AWATER.y"/>
+          <column hidden="0" type="field" width="-1" name="INTPTLAT"/>
+          <column hidden="0" type="field" width="-1" name="INTPTLON"/>
+          <column hidden="0" type="field" width="-1" name="Shape_Leng"/>
+          <column hidden="0" type="field" width="-1" name="Shape_Area"/>
+          <column hidden="0" type="field" width="-1" name="area"/>
+          <column hidden="0" type="field" width="-1" name="hu40"/>
+          <column hidden="0" type="field" width="-1" name="hu50"/>
+          <column hidden="0" type="field" width="-1" name="hu60"/>
+          <column hidden="0" type="field" width="-1" name="hu70"/>
+          <column hidden="0" type="field" width="-1" name="hu80"/>
+          <column hidden="0" type="field" width="-1" name="hu90"/>
+          <column hidden="0" type="field" width="-1" name="hu00"/>
+          <column hidden="0" type="field" width="-1" name="hu10"/>
+          <column hidden="0" type="field" width="-1" name="j50"/>
+          <column hidden="0" type="field" width="-1" name="j60"/>
+          <column hidden="0" type="field" width="-1" name="j70"/>
+          <column hidden="0" type="field" width="-1" name="j80"/>
+          <column hidden="0" type="field" width="-1" name="j90"/>
+          <column hidden="0" type="field" width="-1" name="j00"/>
+          <column hidden="0" type="field" width="-1" name="j10"/>
+          <column hidden="0" type="field" width="-1" name="i50"/>
+          <column hidden="0" type="field" width="-1" name="i60"/>
+          <column hidden="0" type="field" width="-1" name="i70"/>
+          <column hidden="0" type="field" width="-1" name="i80"/>
+          <column hidden="0" type="field" width="-1" name="i90"/>
+          <column hidden="0" type="field" width="-1" name="i00"/>
+          <column hidden="0" type="field" width="-1" name="i10"/>
+          <column hidden="0" type="field" width="-1" name="adj40"/>
+          <column hidden="0" type="field" width="-1" name="adj50"/>
+          <column hidden="0" type="field" width="-1" name="adj60"/>
+          <column hidden="0" type="field" width="-1" name="adj70"/>
+          <column hidden="0" type="field" width="-1" name="adj80"/>
+          <column hidden="0" type="field" width="-1" name="adj90"/>
+          <column hidden="0" type="field" width="-1" name="adj00"/>
+          <column hidden="0" type="field" width="-1" name="adj10"/>
+          <column hidden="0" type="field" width="-1" name="hu40_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="hu50_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="hu60_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="hu70_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="hu80_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="hu90_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="hu00_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="hu10_sqmi"/>
+          <column hidden="0" type="field" width="-1" name="urb40"/>
+          <column hidden="0" type="field" width="-1" name="urb50"/>
+          <column hidden="0" type="field" width="-1" name="urb60"/>
+          <column hidden="0" type="field" width="-1" name="urb70"/>
+          <column hidden="0" type="field" width="-1" name="urb80"/>
+          <column hidden="0" type="field" width="-1" name="urb90"/>
+          <column hidden="0" type="field" width="-1" name="urb00"/>
+          <column hidden="0" type="field" width="-1" name="urb10"/>
+          <column hidden="1" type="actions" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <editform>.</editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath>.</editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <expressionfields/>
+      <previewExpression>"NAME"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+  </projectlayers>
+  <layerorder>
+    <layer id="atl220180627200017565"/>
+  </layerorder>
+  <properties>
+    <Gui>
+      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+    </Gui>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+      <ProjectCrs type="QString">EPSG:4326</ProjectCrs>
+      <ProjectCRSID type="int">3452</ProjectCRSID>
+      <ProjectCRSProj4String type="QString">+proj=longlat +datum=WGS84 +no_defs</ProjectCRSProj4String>
+    </SpatialRefSys>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+    <PositionPrecision>
+      <Automatic type="bool">true</Automatic>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+    </PositionPrecision>
+    <Measurement>
+      <AreaUnits type="QString"></AreaUnits>
+      <DistanceUnits type="QString"></DistanceUnits>
+    </Measurement>
+    <PAL>
+      <DrawOutlineLabels type="bool">true</DrawOutlineLabels>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+      <CandidatesLine type="int">50</CandidatesLine>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
+      <CandidatesPoint type="int">16</CandidatesPoint>
+      <SearchMethod type="int">0</SearchMethod>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+    </PAL>
+    <Digitizing>
+      <LayerSnappingToleranceUnitList type="QStringList">
+        <value>2</value>
+      </LayerSnappingToleranceUnitList>
+      <AvoidIntersectionsList type="QStringList"/>
+      <LayerSnappingList type="QStringList">
+        <value>atl220180627200017565</value>
+      </LayerSnappingList>
+      <LayerSnapToList type="QStringList">
+        <value>to_vertex_and_segment</value>
+      </LayerSnapToList>
+      <LayerSnappingToleranceList type="QStringList">
+        <value>0.000000</value>
+      </LayerSnappingToleranceList>
+      <LayerSnappingEnabledList type="QStringList">
+        <value>disabled</value>
+      </LayerSnappingEnabledList>
+      <SnappingMode type="QString">current_layer</SnappingMode>
+      <DefaultSnapType type="QString">off</DefaultSnapType>
+      <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
+      <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
+    </Digitizing>
+  </properties>
+  <visibility-presets/>
+  <transformContext/>
+  <projectMetadata>
+    <identifier></identifier>
+    <parentidentifier></parentidentifier>
+    <language></language>
+    <type></type>
+    <title></title>
+    <abstract></abstract>
+    <links/>
+    <author></author>
+    <creation></creation>
+  </projectMetadata>
+  <Annotations/>
+  <Layouts>
+    <Layout printResolution="300" units="mm" worldFileMap="{747498a7-99be-4159-b302-81f1f9edf510}" name="test1">
+      <Snapper snapToGuides="1" snapToGrid="0" tolerance="5" snapToItems="1"/>
+      <Grid resolution="10" resUnits="mm" offsetX="0" offsetUnits="mm" offsetY="0"/>
+      <PageCollection>
+        <symbol type="fill" alpha="1" clip_to_extent="1" name="">
+          <layer class="SimpleFill" enabled="1" locked="0" pass="0">
+            <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+            <prop v="255,255,255,255" k="color"/>
+            <prop v="miter" k="joinstyle"/>
+            <prop v="0,0" k="offset"/>
+            <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+            <prop v="MM" k="offset_unit"/>
+            <prop v="35,35,35,255" k="outline_color"/>
+            <prop v="no" k="outline_style"/>
+            <prop v="0.26" k="outline_width"/>
+            <prop v="MM" k="outline_width_unit"/>
+            <prop v="solid" k="style"/>
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" value="" name="name"/>
+                <Option name="properties"/>
+                <Option type="QString" value="collection" name="type"/>
+              </Option>
+            </data_defined_properties>
+          </layer>
+        </symbol>
+        <LayoutItem size="297,210,mm" zValue="0" excludeFromExports="0" outlineWidthM="0.3,mm" itemRotation="0" blendMode="0" positionLock="false" uuid="{ce75d6ed-591d-4218-9e05-353b6e7adc67}" frame="false" templateUuid="{ce75d6ed-591d-4218-9e05-353b6e7adc67}" position="0,0,mm" frameJoinStyle="miter" opacity="1" visibility="1" referencePoint="0" background="true" groupUuid="" positionOnPage="0,0,mm" type="65638" id="">
+          <FrameColor alpha="255" red="0" blue="0" green="0"/>
+          <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+          <LayoutObject>
+            <dataDefinedProperties>
+              <Option type="Map">
+                <Option type="QString" value="" name="name"/>
+                <Option name="properties"/>
+                <Option type="QString" value="collection" name="type"/>
+              </Option>
+            </dataDefinedProperties>
+            <customproperties/>
+          </LayoutObject>
+        </LayoutItem>
+        <GuideCollection visible="1"/>
+      </PageCollection>
+      <LayoutItem frameJoinStyle="miter" numMapUnitsPerScaleBarUnit="100000" unitLabel="mi" templateUuid="{6f0434f8-80ae-428f-bb51-47ef00a5b194}" positionLock="false" unitType="mi" opacity="1" numSegments="4" visibility="1" zValue="3" boxContentSpace="1" groupUuid="" lineJoinStyle="miter" uuid="{6f0434f8-80ae-428f-bb51-47ef00a5b194}" style="Line Ticks Middle" frame="false" numUnitsPerSegment="1e+6" size="76.9315,16.8446,mm" background="false" segmentSizeMode="0" excludeFromExports="0" height="3" alignment="0" maxBarWidth="150" outlineWidthM="0.3,mm" positionOnPage="199.281,180.938,mm" type="65646" mapUuid="{747498a7-99be-4159-b302-81f1f9edf510}" segmentMillimeters="12.8624" referencePoint="0" position="199.281,180.938,mm" lineCapStyle="square" id="" outlineWidth="0.3" numSegmentsLeft="2" itemRotation="0" labelBarSpace="3" minBarWidth="50" blendMode="0">
+        <FrameColor alpha="255" red="0" blue="0" green="0"/>
+        <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" value="" name="name"/>
+              <Option name="properties"/>
+              <Option type="QString" value="collection" name="type"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <text-style fontWordSpacing="0" fontSizeUnit="Point" fontWeight="50" textColor="0,0,0,255" fontCapitals="0" fontLetterSpacing="0" multilineHeight="1" fontFamily=".SF NS Text" blendMode="0" fontUnderline="0" fontSize="12" textOpacity="1" namedStyle="" fontItalic="0" fontStrikeout="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0">
+          <text-buffer bufferSize="1" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferColor="255,255,255,255" bufferJoinStyle="128" bufferNoFill="1" bufferOpacity="1" bufferDraw="0"/>
+          <background shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRadiiY="0" shapeFillColor="255,255,255,255" shapeBorderWidth="0" shapeOpacity="1" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeJoinStyle="64" shapeBlendMode="0" shapeSizeX="0" shapeOffsetUnit="MM" shapeType="0" shapeOffsetX="0" shapeRotation="0" shapeRotationType="0" shapeBorderColor="128,128,128,255" shapeSizeType="0" shapeRadiiX="0" shapeBorderWidthUnit="MM" shapeSizeUnit="MM" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeOffsetY="0" shapeSizeY="0" shapeDraw="0" shapeRadiiUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0"/>
+          <shadow shadowOpacity="0.7" shadowOffsetAngle="135" shadowBlendMode="6" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowColor="0,0,0,255" shadowOffsetGlobal="1" shadowOffsetUnit="MM" shadowRadius="1.5" shadowRadiusAlphaOnly="0" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100" shadowUnder="0" shadowDraw="0" shadowRadiusUnit="MM" shadowOffsetDist="1"/>
+        </text-style>
+        <fillColor alpha="255" red="0" blue="0" green="0"/>
+        <fillColor2 alpha="255" red="255" blue="255" green="255"/>
+        <strokeColor alpha="255" red="0" blue="0" green="0"/>
+      </LayoutItem>
+      <LayoutItem marginX="0" size="87.355,83.8295,mm" zValue="2" excludeFromExports="0" valign="64" halign="4" outlineWidthM="0.3,mm" itemRotation="0" blendMode="0" htmlState="0" positionLock="false" uuid="{45eae57e-2d95-4fd5-8f35-a8c31ea253ef}" frame="false" templateUuid="{45eae57e-2d95-4fd5-8f35-a8c31ea253ef}" position="0,-7.11428,mm" labelText="Atlanta&#xa;sub\urban extent&#xa;1940&#xa;" frameJoinStyle="miter" opacity="1" visibility="1" referencePoint="0" background="false" groupUuid="" marginY="0" positionOnPage="0,-7.11428,mm" type="65641" id="">
+        <FrameColor alpha="255" red="0" blue="0" green="0"/>
+        <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" value="" name="name"/>
+              <Option name="properties"/>
+              <Option type="QString" value="collection" name="type"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <LabelFont style="Regular" description="Andale Mono,28,-1,5,50,0,0,0,0,0,Regular"/>
+        <FontColor red="0" blue="0" green="0"/>
+      </LayoutItem>
+      <LayoutItem drawCanvasItems="true" size="278.518,193.121,mm" zValue="1" followPreset="false" mapRotation="0" keepLayerSet="false" excludeFromExports="0" outlineWidthM="0.3,mm" itemRotation="0" blendMode="0" positionLock="false" uuid="{747498a7-99be-4159-b302-81f1f9edf510}" frame="false" templateUuid="{747498a7-99be-4159-b302-81f1f9edf510}" position="9.241,8.43926,mm" frameJoinStyle="miter" followPresetName="" opacity="1" visibility="1" referencePoint="0" background="true" groupUuid="" positionOnPage="9.241,8.43926,mm" type="65639" id="">
+        <FrameColor alpha="255" red="0" blue="0" green="0"/>
+        <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" value="" name="name"/>
+              <Option name="properties"/>
+              <Option type="QString" value="collection" name="type"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <Extent xmin="-192706.34287024740478955" xmax="120340.49743044617935084" ymin="1067071.91989864525385201" ymax="1284135.33607924683019519"/>
+        <LayerSet/>
+        <AtlasMap margin="0.10000000000000001" scalingMode="2" atlasDriven="0"/>
+      </LayoutItem>
+      <customproperties>
+        <property key="atlasRasterFormat" value="png"/>
+      </customproperties>
+      <Atlas filenamePattern="'output_'||@atlas_featurenumber" coverageLayer="" sortFeatures="0" filterFeatures="0" enabled="0" pageNameExpression="" hideCoverage="0"/>
+    </Layout>
+  </Layouts>
+</qgis>

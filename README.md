@@ -6,6 +6,9 @@ The Hammer method uses historic county-level Census data (Minnesota Pop Center, 
 
 ## Getting started
 
+## Maps
+An example of our sub/urbanization approach in Atlanta, GA is available in the [this folder](maps/Q/).
+
 ### Files 
 Aside from computing the sub-geographies in ArcGIS, all work contained in this project is completed in RStudio. Most necessary data is available in the [data](data) folder. All scripts are located in the [scripts](scripts) folder. Maps and a .gif of urbanization in Atlanta from 1940 to 2010 are available in the [maps](maps) folder
 

@@ -24,43 +24,47 @@ library(purrr)
 library(ggplot2)
 library(readxl)
 
-# read in county-level number of housing units, 1940-2010
+# read in number of housing units (county), 1940-2010
 # calculated in h_units.R
 h_units_national <- read_csv("csv/h_units_national.csv")
 
-# read in housing units by 'year structure built' from 2011-15 ACS, downloaded from NHGIS
+# read in housing units: 'Year structure built' (block group, 2011-15 ACS, 
+# downloaded from NHGIS)
 # metadata: data/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp_codebook.txt
 USbg <- read_csv("data/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
 #for scott's computer:
 #USbg <- read.csv("C:/Users/scott/Dropbox/hafley/urbanization/nhgis0051_csv/nhgis0051_ds215_20155_2015_blck_grp.csv")
 
-# clean tibble
+# clean block group ACS
 USbg <- USbg %>%
   select(-c(3,4,9,10,13:37)) %>%
   mutate(COUNTYJ = str_sub(GISJOIN, 1, 8))
 
 # read block group area
-# area unit: square miles of each block group.
-# area calculated in ArcGIS; re-projected and calculated using equal area projection
+# unit: square miles
+# area calculated in ArcGIS; re-projected data, and calculated area 
+# using equal area projection
 bg_area <- read_csv("data/areas.txt")
 
 # remove unecessary columns
 bg_area <- bg_area %>%
   select(-c(7:9))
 
-# join area to 'Year Structure Built' tibble
+# join area to block group ACS
 USbg <- USbg %>%
   left_join(x = USbg, y = bg_area, by = "GISJOIN") %>%
   rename(geoid = GEOID)
 
-# join county housing units to block group tibble
+# join housing units (county, 1940-2010) to block group ACS
 US_bg2 <- left_join(USbg,h_units_national, by = 'COUNTYJ')
 
 
-# jXX = total number of housing units in county during time t, based on year structure built in ACS
-# iXX = total number of housing units in block group during time t, based on year structure built in ACS
+# jXX = total number of housing units in county during time t, 
+           #     based on year structure built in ACS
+# iXX = total number of housing units in block group during time t, 
+           # based on year structure built in ACS
 # adjXX = adjusted number of housing units in block group, hammer method output
-# additional reference: https://www.nature.com/articles/nclimate2961#methods
+# reference: https://www.nature.com/articles/nclimate2961#methods
 
 US_bg2 <- US_bg2 %>%
   group_by(COUNTYJ) %>%
@@ -183,19 +187,23 @@ US_bg2 %>%
 
 
 
-# use tigris package to pull in spatial files; to join and map US_bg2
+# use tigris package to enable mapping; generate tigris file of atlanta, ga 
+# metropolitan block groups. Join to US_bg (atlanta parcels) and map.
 
+# GA block groups
 gaBGs <- block_groups("GA", cb = TRUE)
 
 ggplot(gaBGs) +
   geom_sf()
 
+# Atlanta Metro
 cb <- core_based_statistical_areas(cb = TRUE)
 atl <- filter(cb, grepl("Atlanta", NAME))
 
 ggplot(atl) + 
   geom_sf()
 
+# select bg's inside atl metro
 w1 <- st_within(gaBGs, atl)
 
 print(length(w1))
@@ -216,7 +224,12 @@ ggplot() +
   geom_sf(data = atl, fill = NA, color = "red")
 
 atl_hammer <- left_join(x = p2, y = US_bg2, by = c('GEOID' = 'geoid'))
+atl_hammer <- atl_hammer %>%
+  st_transform(crs = "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 
+               +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 
+               +units=m +no_defs")
 
+write_sf(atl_hammer, "data/atl2.geojson")
 
 # the following scripts create the maps located in the 'maps' folder.
 
@@ -379,3 +392,12 @@ list.files(path = "maps/.", pattern = "*.png", full.names = T) %>%
   image_join() %>% # joins image
   image_animate(fps=2) %>% # animates, can opt for number of loops
   image_write("maps/atl.gif") # write to current dir
+
+
+
+# animation of maps made in qgis
+list.files(path = "maps/Q/.", pattern = "*.png", full.names = T) %>%
+  map(image_read) %>% # reads each path file
+  image_join() %>% # joins image
+  image_animate(fps=2) %>% # animates, can opt for number of loops
+  image_write("maps/Q/atlq.gif") # write to current dir
