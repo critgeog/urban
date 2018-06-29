@@ -1,13 +1,13 @@
-# urban and suburban boundaries
+# sub\urban boundaries
 
-This project establishes sub/urban boundaries. These boundaries offer one approach to visualize and analyze sub/urbanization in US metropolitan areas over time, from 1940 to 2010. We use the Hammer Method to backcast estimates of housing units at the block group (or census tract) during each decade. 
+This project establishes sub|urban boundaries. These boundaries offer one approach to visualize and analyze sub|urbanization in US metropolitan areas over time, from 1940 to 2010. We use the Hammer Method to backcast estimates of housing units at the block group (or census tract) during each decade. 
 
 The Hammer method uses historic county-level Census data (Minnesota Pop Center, 2011), in combination with current county-level and block group (or census tracts) ACS data to estimate the number of housing units. We use these three data components to generate an estimated number of housing units in each sub-geography for each time period. Then, we normalize the number across space by dividing the number of housing units in each sub-geography by the the sub-geography area (square miles). The output, then, is the number of housing units per square mile within a given block group.
 
 ## Getting started
 
 ## Maps
-An example of our sub/urbanization approach in Atlanta, GA is available in the [this folder](maps/Q/).
+An example of our sub|urbanization approach in Atlanta, GA is available in the [this folder](maps/Q/).
 
 ### Files 
 Aside from computing the sub-geographies in ArcGIS, all work contained in this project is completed in RStudio. Most necessary data is available in the [data](data) folder. All scripts are located in the [scripts](scripts) folder. Maps and a .gif of urbanization in Atlanta from 1940 to 2010 are available in the [maps](maps) folder
@@ -37,3 +37,4 @@ At this point, the Hammer Method component of the project is complete. Estimated
 
 Additional factors, such as airports, parks, satelite imagery, and additional  dimensions of 'urbanity' to include in this framework are up to you. I have a national file of airports that I can share, if you think that might be helpful.
 
+[Atlanta suburbanization gif](maps/Q/atlq.gif)
