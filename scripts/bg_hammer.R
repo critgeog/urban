@@ -22,7 +22,6 @@ library(tmaptools)
 #library(magrittr)
 library(purrr)
 library(ggplot2)
-library(readxl)
 
 # read in number of housing units (county), 1940-2010
 # calculated in h_units.R
@@ -44,15 +43,20 @@ USbg <- USbg %>%
 # unit: square miles
 # area calculated in ArcGIS; re-projected data, and calculated area 
 # using equal area projection
-bg_area <- read_csv("data/areas.txt")
+
+# bg_area <- read_csv("data/areas.txt")
+
+# new area file (located in our shared dropbox folder. 
+# the '../../' move 'up', for a lack of a better word, in the working directory)
+new_area <- read_csv("../../../../dropbox/hafley/urbanization/blockGroup_area/usblkgrp.txt")
 
 # remove unecessary columns
-bg_area <- bg_area %>%
+new_area <- new_area %>%
   select(-c(7:9))
 
 # join area to block group ACS
 USbg <- USbg %>%
-  left_join(x = USbg, y = bg_area, by = "GISJOIN") %>%
+  left_join(x = USbg, y = new_area, by = "GISJOIN") %>%
   rename(geoid = GEOID)
 
 # join housing units (county, 1940-2010) to block group ACS
@@ -100,20 +104,25 @@ US_bg2 <- US_bg2 %>%
 US_bg2 <- US_bg2 %>%
   group_by(COUNTYJ) %>%
   mutate(
-    hu40_sqmi = adj40/area,
-    hu50_sqmi = adj50/area,
-    hu60_sqmi = adj60/area,
-    hu70_sqmi = adj70/area,
-    hu80_sqmi = adj80/area,
-    hu90_sqmi = adj90/area,
-    hu00_sqmi = adj00/area,
-    hu10_sqmi = adj10/area
+    hu40_sqmi = adj40/areaBG,
+    hu50_sqmi = adj50/areaBG,
+    hu60_sqmi = adj60/areaBG,
+    hu70_sqmi = adj70/areaBG,
+    hu80_sqmi = adj80/areaBG,
+    hu90_sqmi = adj90/areaBG,
+    hu00_sqmi = adj00/areaBG,
+    hu10_sqmi = adj10/areaBG
   )
 
-# write_csv(US_bg2, "csv/blk_grp_complete.csv")
+#write_csv(US_bg2, "csv/blk_grp_complete.csv")
+#write_csv(US_bg2, "csv/blk_grp_newArea.csv")
 
+US_bg2 %>%
+  distinct(STATE) %>%
+  print(n = Inf)
 
-
+class(US_bg2)
+US_bg2 <- ungroup(US_bg2)
 
 
 

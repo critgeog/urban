@@ -1,3 +1,7 @@
+
+# function to retrieve block groups in metro on demand
+#https://walkerke.github.io/2017/05/tigris-metros/
+
 metro_block_groups <- function(metro_name) {
   
   # First, identify which states intersect the metro area using the
@@ -37,18 +41,25 @@ metro_block_groups <- function(metro_name) {
   return(output)
   
 }
-
+# select metro of interest, (e.g. below)
 chi <- metro_block_groups("Chicago")
 atl <- metro_block_groups("Atlanta")
 norl <- metro_block_groups("New Orleans")
 bos <- metro_block_groups("Boston")
+nyc <- metro_block_groups("New York")
 
+# test function
 ggplot(chi) + geom_sf()
 ggplot(atl) + geom_sf()
 
+# join block group to US_bg2 (created in bg_hammer.R)
 chi2 <- left_join(x = chi, y = US_bg2, by = c('GEOID' = 'geoid'))
 atl2 <- left_join(x = atl, y = US_bg2, by = c('GEOID' = 'geoid'))
+nyc2 <- left_join(x = nyc, y = US_bg2, by = c('GEOID' = 'geoid'))
+norl2 <- left_join(x = norl, y = US_bg2, by = c('GEOID' = 'geoid'))
 
+# project (a couple options listed; the projections are general for US, 
+# just need to change the input/output object)
 atl2 <- atl2 %>%
   st_transform(crs = "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 
                +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 
@@ -59,7 +70,37 @@ chi2 <- chi2 %>%
                +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 
                +units=m +no_defs")
 
-# the following scripts create the maps located in the 'maps' folder.
+nyc2 <- nyc2 %>%
+  st_transform(crs = "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 
+               +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 
+               +units=m +no_defs")
+
+norl2 <- norl2 %>%
+  st_transform(crs = "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 
+               +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 
+               +units=m +no_defs")
+
+# simple map to test Northeast region (NYC)
+tm_shape(nyc2) +
+  tm_fill("hu10_sqmi", breaks = c(0, 200, 200000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          title = 'NYC 2010')
+
+# and example to show missing data in water block groups
+tm_shape(norl2) +
+  tm_fill("hu10_sqmi", breaks = c(0, 200, 200000),
+          palette = leg_col, auto.palette.mapping = FALSE,
+          title = 'NOLA 2010')
+
+
+
+
+
+
+
+
+
+# the following scripts create maps with more detail (i.e. legend, roads)
 
 leg_col <- c("#E1EFFA","#065AA0")
 lbl <- c("< 200 units/sq mi", "> 200 units/sq mi")
