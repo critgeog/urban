@@ -56,7 +56,10 @@ ggplot(atl) + geom_sf()
 chi2 <- left_join(x = chi, y = US_bg2, by = c('GEOID' = 'geoid'))
 atl2 <- left_join(x = atl, y = US_bg2, by = c('GEOID' = 'geoid'))
 nyc2 <- left_join(x = nyc, y = US_bg2, by = c('GEOID' = 'geoid'))
+<<<<<<< HEAD
 norl2 <- left_join(x = norl, y = US_bg2, by = c('GEOID' = 'geoid'))
+=======
+>>>>>>> master
 
 # project (a couple options listed; the projections are general for US, 
 # just need to change the input/output object)
@@ -75,15 +78,19 @@ nyc2 <- nyc2 %>%
                +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 
                +units=m +no_defs")
 
+<<<<<<< HEAD
 norl2 <- norl2 %>%
   st_transform(crs = "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 
                +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 
                +units=m +no_defs")
 
+=======
+>>>>>>> master
 # simple map to test Northeast region (NYC)
 tm_shape(nyc2) +
   tm_fill("hu10_sqmi", breaks = c(0, 200, 200000),
           palette = leg_col, auto.palette.mapping = FALSE,
+<<<<<<< HEAD
           title = 'NYC 2010')
 
 # and example to show missing data in water block groups
@@ -91,6 +98,9 @@ tm_shape(norl2) +
   tm_fill("hu10_sqmi", breaks = c(0, 200, 200000),
           palette = leg_col, auto.palette.mapping = FALSE,
           title = 'NOLA 2010')
+=======
+          title = '2010')
+>>>>>>> master
 
 
 
@@ -100,7 +110,11 @@ tm_shape(norl2) +
 
 
 
+<<<<<<< HEAD
 # the following scripts create maps with more detail (i.e. legend, roads)
+=======
+# the following scripts create the maps 
+>>>>>>> master
 
 leg_col <- c("#E1EFFA","#065AA0")
 lbl <- c("< 200 units/sq mi", "> 200 units/sq mi")
