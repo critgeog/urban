@@ -1,3 +1,8 @@
+
+# function to retrieve block groups in metro on demand
+
+#https://walkerke.github.io/2017/05/tigris-metros/
+
 metro_block_groups <- function(metro_name) {
   
   # First, identify which states intersect the metro area using the

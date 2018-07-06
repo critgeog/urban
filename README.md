@@ -32,7 +32,7 @@ Similarly, [UShammerMethodCT](scripts/UShammerCT.R) is modeled after its BG coun
 
 ### additional notes
 
-At this point, the Hammer Method component of the project is complete. Estimated housing units over time, based on Hammer, are available over time and across space. I also create a dummy variable to signal if it is considered 'urban' for each time period. I classify each sub-geography as 'urban' if it meets a threshold of > 200 housing units per square mile, or if the previous decade was classified as urban. Thus, once a block group 'becomes urban,' it remains so moving forward.
+At this point, the Hammer Method component of the project is almost complete. Estimated housing units over time, based on Hammer, are available over time and across space. There are a few errors in instances of new counties. I also create a dummy variable to signal if it is considered 'urban' for each time period. I classify each sub-geography as 'urban' if it meets a threshold of > 200 housing units per square mile, or if the previous decade was classified as urban. Thus, once a block group 'becomes urban,' it remains so moving forward.
 
 
 Additional factors, such as airports, parks, satelite imagery, and additional  dimensions of 'urbanity' to include in this framework are up to you. I have a national file of airports that I can share, if you think that might be helpful.
