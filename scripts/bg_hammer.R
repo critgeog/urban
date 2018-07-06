@@ -22,7 +22,6 @@ library(tmaptools)
 #library(magrittr)
 library(purrr)
 library(ggplot2)
-library(readxl)
 
 # read in number of housing units (county), 1940-2010
 # calculated in h_units.R
@@ -49,7 +48,6 @@ USbg <- USbg %>%
 
 # new area file (located in our shared dropbox folder. 
 # the '../../' move 'up', for a lack of a better word, in the working directory)
-
 new_area <- read_csv("../../../../dropbox/hafley/urbanization/blockGroup_area/usblkgrp.txt")
 
 # remove unecessary columns
@@ -116,12 +114,15 @@ US_bg2 <- US_bg2 %>%
     hu10_sqmi = adj10/areaBG
   )
 
-# write_csv(US_bg2, "csv/blk_grp_complete.csv")
+#write_csv(US_bg2, "csv/blk_grp_complete.csv")
+#write_csv(US_bg2, "csv/blk_grp_newArea.csv")
 
+US_bg2 %>%
+  distinct(STATE) %>%
+  print(n = Inf)
 
-
-
-
+class(US_bg2)
+US_bg2 <- ungroup(US_bg2)
 
 
 
